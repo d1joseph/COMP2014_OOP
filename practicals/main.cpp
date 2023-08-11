@@ -1,5 +1,5 @@
 #include <iostream>
-#include "week_2/prac2.cpp"
+#include "week_3/prac3.cpp"
 
 using namespace std;
 
@@ -12,17 +12,9 @@ using namespace std;
 
 int main()
 {   
-    // task 2.3
-    // int a = 30;
-    // int b = 20;
-    // int c = 10;
-    // 
-    // sort(a, b, c);
-    // 
-    // cout << a << " " << b << " "<< c << endl;
-
-    // task 2.4
-    calculatePowerlineLength();
+    // task 3.1
+    // task 3.2
+    // task 3.3
 
     return 0;
 }

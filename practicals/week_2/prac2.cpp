@@ -3,14 +3,14 @@
 
 using namespace std;
 
-// task 2.1 - declaring a function to overload
+// task 2.1 declaration - declaring a function to overload
 void testDefaultArg();
 void testDefaultArg(int day);
 void testDefaultArg(int day, string month);
 void testDefaultArg(int day, string month, int year);
 
 void testDefaultArg(int day, string month, int year)
-// task 2.1 - testDefaultArg takes the day, month and year
+// task 2.1 definition - testDefaultArg takes the day, month and year
 // as overloaded input parameters and outputs a string with
 // based on the given parameters.
 {  
@@ -36,10 +36,10 @@ void testDefaultArg()
 
 void getQuotientAndRemainder(int& numerator, int& denominator)
 // task 2.2 - getQuotientAndRemainder takes a numerator and denominator
-// as input parameters, and outputs their quotient and remainder.
+// as input parameters by reference, and outputs their quotient and remainder.
 {
     int quotient = numerator / denominator;
-    int remainder = numerator % denominator; // Corrected the calculation
+    int remainder = numerator % denominator;
 
     cout << "Quotient: " << quotient << endl;
     cout << "Remainder: " << remainder << endl;
@@ -47,11 +47,8 @@ void getQuotientAndRemainder(int& numerator, int& denominator)
 
 void sort(int& a, int& b, int& c)
 // task 2.3 - sort takes three integer values by reference as input
-// parameters and reassigns the values of a,b and c from smallest to
-// largest.
+// parameters, by reference and sorts the values of a, b and c in ascending order
 {
-    cout << "calling sort()" << endl;
-
     int tmp;
 
     if (a > c) {
@@ -77,7 +74,8 @@ void sort(int& a, int& b, int& c)
 
 int calculateTotalCost(int olLength, int uwLength, int olCPM, int uwCPM)
 // task 2.4 - calculateTotalCost is a helper function
-// to calculatePowerlineLength
+// to calculatePowerlineLength, which returns the totalCost of
+// calculated from the given parameters.
 {
     int totalCost = olCPM * olLength + uwCPM * uwLength;
     return totalCost;

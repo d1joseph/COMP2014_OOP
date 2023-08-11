@@ -1,3 +1,7 @@
+// practical 1 tasks
+// author: Dhiv Joseph
+// studentId: 18225899
+
 #include <iostream>
 #include <cstdlib>
 #include <cmath>

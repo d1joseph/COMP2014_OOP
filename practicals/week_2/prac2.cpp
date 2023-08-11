@@ -1,3 +1,7 @@
+// practical 2 tasks
+// author: Dhiv Joseph
+// studentId: 18225899
+
 #include <iostream>
 #include <string>
 

@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <cmath>
 
 using namespace std;
 
@@ -34,15 +35,26 @@ void testDefaultArg()
     cout << "Today is a beautiful day" << endl;
 }
 
-void getQuotientAndRemainder(int& numerator, int& denominator)
-// task 2.2 - getQuotientAndRemainder takes a numerator and denominator
-// as input parameters by reference, and outputs their quotient and remainder.
+void getQuotientAndRemainder(int& numerator, int& denominator, int& quotient, int& remainder)
+// task 2.2 - getQuotientAndRemainder takes a numerator, denominator, quotient and remainder
+// as input parameters by reference, and outputs the quotient and remainder.
 {
-    int quotient = numerator / denominator;
-    int remainder = numerator % denominator;
+    quotient = numerator / denominator;
+    remainder = numerator % denominator;
 
     cout << "Quotient: " << quotient << endl;
     cout << "Remainder: " << remainder << endl;
+}
+
+void swap(int& a, int& b)
+// task 2.3 - swap is a helper function that swaps the values of input
+// parameters a and b by reference.
+{
+    int tmp;
+
+    tmp = a;
+    a = b;
+    b = tmp;
 }
 
 void sort(int& a, int& b, int& c)
@@ -72,67 +84,27 @@ void sort(int& a, int& b, int& c)
     cout << a << " " << b << " "<< c << endl;
 }
 
-int calculateTotalCost(int olLength, int uwLength, int olCPM, int uwCPM)
-// task 2.4 - calculateTotalCost is a helper function
-// to calculatePowerlineLength, which returns the totalCost of
-// calculated from the given parameters.
+// TODO: solve 2.4
+double calculateTotalCost(double underwaterDist, double riverWidth, double factoryDist, double underwaterCost, double overlandCost)
+// task 2.4 - calculateTotalCost is a helper function to calculate the total cost for the project described
+// in task 2.4 ...
 {
-    int totalCost = olCPM * olLength + uwCPM * uwLength;
+    double underwaterCostTotal = underwaterCost * underwaterDist;
+    double overlandCostTotal = overlandCost * (factoryDist / 1000.0 + riverWidth / 1000.0 - underwaterDist / 1000.0);
+    double totalCost = underwaterCostTotal + overlandCostTotal;
+
     return totalCost;
 }
 
-void calculatePowerlineLength()
-// task 2.4 - calculatePowerlineLength outputs the most economical length
-// of powerlines to run underwater (uw) and/or overland (ol), as well as the total cost (c).
+// TODO: solve 2.4
+void calculateOptimalLength(double riverWidth, double factoryDistance, double underwaterCost, double overlandCost)
+// task 2.4 - calculateOptimalLength calculates and outputs the optimal length
+// using the width, distance, costX and costY parameters ...
 {   
-    int width, distance, totalDistance; // width of river and distance of factory downstream
-    int uwCPM, olCPM, totalCost; // underwater and overland cost per meter, and total cost
-    int uwLength, olLength; // most economical length of powerline underwater and overland
+    
+}
 
-    // input non-negative width of the river
-    do {
-        cout << "enter the width of the river (meters): " << endl;
-        cin >> width;
-    } while (width < 0);
-
-    // input non-negative distance of the factory downstream across the river
-    do {
-        cout << "enter the distance of the factory downstream (meters): " << endl;
-        cin >> distance;
-    } while (distance < 0);
-
-    // input non-negative unit cost of laying the powerline underwater
-    do {
-        cout << "enter the unit cost of powerline underwater ($ cost per meter): " << endl;
-        cin >> uwCPM;
-    } while (uwCPM < 0);
-
-    // input non-negative unit cost of laying the powerline overland, l
-    do {
-        cout << "enter the unit cost of powerline overland ($ per meter): " << endl;
-        cin >> olCPM;
-    } while (olCPM < 0);
-
-    totalDistance = width + distance;
-
-    olLength = totalDistance;
-    uwLength = totalDistance;
-
-    int totalOverlandCost = calculateTotalCost(olLength, 0, olCPM, uwCPM);
-    int totalUnderwaterCost = calculateTotalCost(0, uwLength, olCPM, uwCPM);
-
-    if (totalOverlandCost <= totalUnderwaterCost) {
-        olLength = totalDistance;
-        uwLength = 0;
-    } else {
-        olLength = 0;
-        uwLength = totalDistance;
-    }
-
-    cout << "optimal lengths" << endl;
-    cout << "overland: " << olLength << " meters" << endl;
-    cout << "underwater: " << uwLength << " meters" << endl;
-
-    int optimalCost = calculateTotalCost(olLength, uwLength, olCPM, uwCPM);
-    cout << "optimal total cost: $" << optimalCost << endl;
+int main()
+{   
+    return 0;
 }

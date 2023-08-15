@@ -12,17 +12,8 @@ using namespace std;
 
 int main()
 {   
-    // task 2.3
-    // int a = 30;
-    // int b = 20;
-    // int c = 10;
-    // 
-    // sort(a, b, c);
-    // 
-    // cout << a << " " << b << " "<< c << endl;
-
     // task 2.4
-    calculatePowerlineLength();
+    findOptimalPath();
 
     return 0;
 }

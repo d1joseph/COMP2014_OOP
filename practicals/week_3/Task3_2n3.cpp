@@ -28,9 +28,13 @@ void displayBoard(int board[][3]) {
 }
 
 bool isValidMove(int board[][3], int x, int y) {
-	if (true) //Add your code here)
+	const int rowLength = 3;
+	const int colLength = 3;
+	
+	if (x >= 0 && x < rowLength && y >= 0 && y < colLength) //Add your code here)
 		return true;
 	else
+		cout << "invalid move" << endl;
 		return false;
 }
 
@@ -55,18 +59,15 @@ void addMove(int board[][3], int x, int y, int player) {
 }
 
 int gameStatus(int board[][3], int &noOfMoves) {
-//Write your code here to check if the game has been in a win status or a draw status
-//Check rows for a win
-
-//Add your code here
-
-//Check columns for a win
-
-//Add your code here
-
-//Check diagonals for a win
-
-//Add your code here
+	//Write your code here to check if the game has been in a win status or a draw status
+	const int boardSize = 3;
+	
+	//Add your code here
+	
+	// check rows
+	// check columns
+	// check main diagonal
+	// check opposite diagonal
 
 	if (noOfMoves >= 9)
 		return 2;

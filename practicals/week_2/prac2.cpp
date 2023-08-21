@@ -88,7 +88,6 @@ void sort(int& a, int& b, int& c)
     cout << a << " " << b << " "<< c << endl;
 }
 
-// TODO: solve 2.4
 double calculateCost(int &underwaterDist, int &overlandDist, int &underwaterCost, int &overlandCost)
 // task 2.4 - calculateCost is a helper function to calculate the total cost for the project described
 // in task 2.4 ...
@@ -97,7 +96,6 @@ double calculateCost(int &underwaterDist, int &overlandDist, int &underwaterCost
     return totalCost;
 }
 
-// TODO: solve 2.4
 void calculateOptimalLength(int &riverWidth, int &factoryDistance, int &underwaterCost, int &overlandCost)
 // task 2.4 - calculateOptimalLength calculates and outputs the optimal length
 // using the width, distance, costX and costY parameters ...

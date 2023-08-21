@@ -28,14 +28,21 @@ void displayBoard(int board[][3]) {
 }
 
 bool isValidMove(int board[][3], int x, int y) {
-	const int rowLength = 3;
-	const int colLength = 3;
-	
-	if (x >= 0 && x < rowLength && y >= 0 && y < colLength) //Add your code here)
-		return true;
-	else
-		cout << "invalid move" << endl;
+	// check if the cell is within valid range
+	if (x >= 0 && x < 3 && y >= 0 && y < 3) { //Add your code here)
+		// check if the cell is occupied
+		if (board[x][y] == 1 || board[x][y] == -1) {
+				cout << "error: cell is occupied" << endl;
+				cout << "enter valid move:";
+				return false;
+			}
+	} else {
+		cout << "error: cell is not within range" << endl;
+		cout << "enter valid move:";
 		return false;
+	}
+
+	return true;
 }
 
 bool getXOMove(int board[][3], int noOfMoves, int &x, int &y) {
@@ -61,13 +68,85 @@ void addMove(int board[][3], int x, int y, int player) {
 int gameStatus(int board[][3], int &noOfMoves) {
 	//Write your code here to check if the game has been in a win status or a draw status
 	const int boardSize = 3;
+	const int win = 3;
 	
 	//Add your code here
 	
 	// check rows
+	for (int row = 0; row < boardSize; row++) {
+        int symbolCount = 0;
+
+        for (int col = 0; col < boardSize; col++) {
+            // access and process elements here
+            if (board[row][col] == 1) {
+                ++symbolCount;
+                
+                if (symbolCount == win) {
+                    cout << "win found at position " << row << ", " << col << endl;
+                    return 1;
+                }
+            } else {
+                symbolCount = 0;
+            }
+        }
+    }
+
 	// check columns
-	// check main diagonal
-	// check opposite diagonal
+	for (int col = 0; col < boardSize; col++) {
+        int symbolCount = 0;
+
+        for (int row = 0; row < boardSize; row++) {
+            if (board[row][col] == 1) {
+                ++symbolCount;
+                
+                if (symbolCount == win) {
+                    cout << "win found at position " << col << ", " << row << endl;
+                    return 1;
+                }
+            } else {
+                symbolCount = 0;
+            }
+        }
+    }
+
+	// check top-left to bottom-right
+	for (int row = 0; row <= boardSize - win; ++row) {
+        for (int col = 0; col <= boardSize - win; ++col) {
+            int symbolCount = 0;
+            
+            for (int i = 0; i < win; ++i) {
+                if (board[row + i][col + i] == 1) { // Assuming you're looking for the value 1
+                    ++symbolCount;
+                    if (symbolCount == win) {
+                        cout << "win found at position " << row << ", " << col << endl;
+                        return 1;
+                    }
+                } else {
+                    symbolCount = 0;
+                }
+            }
+        }
+    }
+
+	// check top-right to bottom-left
+	for (int row = 0; row <= boardSize - win; ++row) {
+        for (int col = win - 1; col < boardSize; ++col) {
+            int symbolCount = 0;
+            
+            for (int i = 0; i < win; ++i) {
+                if (board[row + i][col - i] == 1) {
+                    ++symbolCount;
+
+                    if (symbolCount == win) {
+                        cout << "win found at position " << col << ", " << row << endl;
+                        return 1;
+                    }
+                } else {
+                    symbolCount = 0;
+                }
+            }
+        }
+    }
 
 	if (noOfMoves >= 9)
 		return 2;

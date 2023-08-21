@@ -20,10 +20,16 @@ void printGrid(int grid[][9]) {
 				symbol = 'O';
 			else
 				symbol = '_';
-
-			cout << symbol;
+			
+			cout << symbol;			
+			if ((j+1) % 3 == 0) {
+				cout << " ";
+			}
 		}
 		cout << endl;
+		if ((i+1) % 3 == 0) {
+			cout << endl;
+		}
 	}
 }
 

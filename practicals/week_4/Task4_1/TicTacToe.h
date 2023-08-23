@@ -25,6 +25,10 @@ public:
 };
 
 TicTacToe::TicTacToe() {//How to call this function?
+	/*
+		A: constructor for TicTacToe, call wherever we want to
+		instantiate the game board object e.g. int main {TicTacToe tictactoe; return 0;}
+	*/
 	for (int row = 0; row < 3; row++)
 		for (int col = 0; col < 3; col++)
 			board[row][col] = 0;
@@ -33,6 +37,12 @@ TicTacToe::TicTacToe() {//How to call this function?
 }
 
 void TicTacToe::displayBoard() {//Where to get the board data?
+	/*
+		A: the board data is iniatilised with 0 values when we call the constructor,
+		the board is represented as a 2d array (array of arrays) with the value of 
+		each cell accessed by its 2 indexes; board[i][j] to get the current value 
+		stored by iterating through the boardusing a nested for loop.
+	*/
 	cout << "   1    2    3" << endl << endl;
 	for (int i = 0; i < 3; i++) {
 		cout << i + 1;
@@ -54,13 +64,22 @@ void TicTacToe::displayBoard() {//Where to get the board data?
 }
 
 bool TicTacToe::isValidMove(int x, int y) {//Add your code to complete the program
-	if (true) //Add your code here)
-		return true;
+	// check if the input is within valid range
+	if (x >= 0 && x < 3 && y >= 0 && y < 3) //Add your code here)
+		// check if the cell is occupied by either player
+		if (board[x][y] == 1 || board[x][y] == -1) {
+			return false;
+		}
 	else
 		return false;
+	
+	return true;
 }
 
 bool TicTacToe::getXOMove(int &x, int &y) {//What does & mean?
+	/*
+		A: address-of operator used to define a call-by reference parameter
+	*/
 
 	if (noOfMoves >= 9)
 		return false;
@@ -77,22 +96,96 @@ bool TicTacToe::getXOMove(int &x, int &y) {//What does & mean?
 }
 
 void TicTacToe::addMove(int x, int y, int player) {//What is this function for?
+	/*
+		A: adds the current player's 'X' or 'O' marker represented by a 1 or -1 to that
+		player's chosen cell at position x, y, can only be used if TicTacToe.isValidMove() 
+		returns true
+	*/
 	board[x][y] = player;
 }
 
 int TicTacToe::gameStatus() {//Add your code to complete the program
-//Write your code here to check if the game has been in a win status or a draw status
-//Check rows for a win
+	//Write your code here to check if the game has been in a win status or a draw status
+	const int WIN = 3;
+	
+	//Check rows for a win
 
-//Add your code here
+	//Add your code here
+	for (int row = 0; row < BOARDSIZE; row++) {
+		int symbolCount = 0;
 
-//Check columns for a win
+		for (int col = 0; col < BOARDSIZE; col++) {
+			// TODO: this only checks player X symbols, how to check O?
+			if (board[row][col] == 1) {
+				++symbolCount;
 
-//Add your code here
+				if (symbolCount == WIN) {
+					return 1;
+				}
+			} else {
+				symbolCount = 0;
+			}
+		}
+	}
 
-//Check diagonals for a win
+	//Check columns for a win
 
-//Add your code here
+	//Add your code here
+	for (int col = 0; col < BOARDSIZE; col++) {
+		int symbolCount = 0;
+
+		for (int row = 0; row < BOARDSIZE; col++) {
+			if (board[row][col] == 1) {
+				++symbolCount;
+
+				if (symbolCount == WIN) {
+					return 1;
+				}
+			} else {
+				symbolCount = 0;
+			}
+		}
+	}
+
+	//Check diagonals for a win
+	
+	//Add your code here
+	// check top-left to bottom-right
+	for (int row = 0; row <= BOARDSIZE - WIN; row++) {
+		for (int col = 0; col <= BOARDSIZE - WIN; col++) {
+			int symbolCount = 0;
+
+			for (int i = 0; i < WIN; i++) {
+				if (board[row + i][col + i] == 1) {
+					++symbolCount;
+					if (symbolCount == WIN) {
+						return 1;
+					}
+				} else {
+					symbolCount = 0;
+				}
+			}
+		}
+	}
+
+	// check top-right to bottom-left
+	for (int row = 0; row <= BOARDSIZE - WIN; row++) {
+		for (int col = 0; col <= BOARDSIZE; col++) {
+			int symbolCount = 0;
+
+			for (int i = 0; i < WIN; i++) {
+				if (board[row + i][col - i] == 1) {
+					++symbolCount;
+
+					if (symbolCount == WIN) {
+						return 1;
+					}
+				} else {
+					symbolCount = 0;
+				}
+			}
+		}
+	}
 
 	if (noOfMoves >= 9)
 		return 2;
@@ -101,6 +194,9 @@ int TicTacToe::gameStatus() {//Add your code to complete the program
 }
 
 int TicTacToe::play() {//What is the counterpart of this function in the original code
+	/*
+		A: The main() function in Task3_2n3.cpp
+	*/
 
 	int player = 1;
 
@@ -137,7 +233,5 @@ int TicTacToe::play() {//What is the counterpart of this function in the origina
 
 	return 0;
 }
-
-
 
 #endif /* TICTACTOE_H_ */

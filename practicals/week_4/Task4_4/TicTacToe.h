@@ -18,6 +18,8 @@ public:
 	TicTacToe();
 	bool isValidMove(int, int);
 	bool getXOMove(int&, int&);
+	bool getXMove(int&, int&);
+	bool getOMove(int&, int&);
 	void addMove(int, int, int);
 	int gameStatus();
 	int play();
@@ -73,6 +75,7 @@ bool TicTacToe::isValidMove(int x, int y) {//Add your code to complete the progr
 	else
 		return false;
 	
+	std::cout << "move is not valid" << std::endl;
 	return true;
 }
 
@@ -84,6 +87,36 @@ bool TicTacToe::getXOMove(int &x, int &y) {//What does & mean?
 	if (noOfMoves >= 9)
 		return false;
 
+	int row, col;
+	do {
+		cin >> row >> col;
+		cout << endl;
+	} while (!isValidMove(row - 1, col - 1));
+	x = row - 1;
+	y = col - 1;
+
+	return true;
+}
+
+// getXMove assigns a random move to x and y
+bool TicTacToe::getXMove(int &x, int &y) {
+	if (noOfMoves >= 9)
+		return false;
+
+	// seed
+	srand(time(0));
+
+	x = rand() % BOARDSIZE + 1;
+	y = rand() % BOARDSIZE + 1;
+
+	return true;
+}
+
+// getOMove gets the x and y move from the human player
+bool TicTacToe::getOMove(int &x, int &y) {
+	if (noOfMoves >= 9)
+		return false;
+	
 	int row, col;
 	do {
 		cin >> row >> col;
@@ -203,14 +236,19 @@ int TicTacToe::play() {//What is the counterpart of this function in the origina
 	displayBoard();
 	int done = 0;
 	while (done == 0) {
+		int x, y;
 		char playerSymbol = (player == 1) ? 'X' : 'O';
 		cout << "Player " << playerSymbol << " enter move: ";
-		int x, y;
+
+		// getXMove(x,y);
+		// getOMove(x,y);
 
 		getXOMove(x, y);
 
 		addMove(x, y, player);
+
 		noOfMoves++;
+		
 		displayBoard();
 
 		done = gameStatus();

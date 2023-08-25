@@ -103,10 +103,10 @@ bool TicTacToe::getXMove(int &x, int &y) {
 		return false;
 
 	// seed
-	srand(3);
+	srand(time(0));
 
-	x = rand() % BOARDSIZE;
-	y = rand() % BOARDSIZE;
+	x = rand() % BOARDSIZE + 1;
+	y = rand() % BOARDSIZE + 1;
 
 	return true;
 }
@@ -237,14 +237,11 @@ int TicTacToe::play() {//What is the counterpart of this function in the origina
 	while (done == 0) {
 		int x, y;
 		char playerSymbol = (player == 1) ? 'X' : 'O';
+		cout << "Player " << playerSymbol << " enter move: ";
 
-		// getXOMove(x, y);
-		if (player == 1) {
-			getXMove(x,y);
-		} else {
-			cout << "Player " << playerSymbol << " enter move: ";
-			getOMove(x,y);
-		}
+		// getXMove(x,y);
+		// getOMove(x,y);
+		getXOMove(x, y);
 
 		addMove(x, y, player);
 		noOfMoves++;

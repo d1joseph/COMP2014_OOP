@@ -67,7 +67,10 @@ int main( )
     */
 
     // instantiate OneDArray here ...
-    OneDArray arr(10);
+    int size;
+    cout << "enter desired size of array:" << endl;
+    cin >> size;
+    OneDArray arr(size);
 
     cout << "array length: " << arr.getSize() << endl;
     
@@ -77,9 +80,12 @@ int main( )
     arr.fillArray();
     
     // search OneDArray with search()
-    arr.search(2);
-    
-    // destruct OneDArray
+    int target;
+    cout << "enter a number to search:" << endl;
+    cin >> target;
+    arr.search(target);
+
+    arr.printArray();
     
     return 0;
 }

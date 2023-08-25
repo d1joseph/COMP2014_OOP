@@ -35,7 +35,7 @@ OneDArray::~OneDArray() {
 // and populates the oneDArray array propertie with those integers,
 // the end of the elements to populate is delimited by the numberUsed.
 void OneDArray::fillArray() {
-    std::cout << "Enter up to " << size << "non-negative integers.\n"
+    std::cout << "Enter up to " << size << " non-negative integers.\n"
     << "Mark the end of the list with a negative number.\n";
 
     int next, index = 0;
@@ -63,7 +63,7 @@ int OneDArray::search(int target) {
     }
 
     if (found) {
-        std::cout << "target (" << target << ")" << " at position " << index << std::endl;
+        std::cout << "target (" << target << ")" << " at index arr[" << index-1 << "]" << std::endl;
         return index;
     } else {
         std::cout << "target not in list" << std::endl;
@@ -82,4 +82,5 @@ void OneDArray::printArray() {
     for (int i = 0; i < size; i++) {
         std::cout << oneDArray[i];
     }
+    std::cout << std::endl;
 }

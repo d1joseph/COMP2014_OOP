@@ -71,12 +71,12 @@ int OneDArray::search(int target) {
     }
 }
 
-// getter
+// getSize is a getter method to get the length of oneDArray
 int OneDArray::getSize() {
     return size;
 }
 
-// output array
+// printArray outputs the current elements in the oneDArray
 void OneDArray::printArray() {
     std::cout << "outputting current elements in array: " << std::endl;
     for (int i = 0; i < size; i++) {

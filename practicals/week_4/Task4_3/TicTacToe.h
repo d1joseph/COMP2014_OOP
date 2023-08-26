@@ -45,7 +45,7 @@ void TicTacToe::displayBoard() {//Where to get the board data?
 		each cell accessed by its 2 indexes; board[i][j] to get the current value 
 		stored by iterating through the boardusing a nested for loop.
 	*/
-	cout << "   1    2    3" << endl << endl;
+	cout << endl << "   1    2    3" << endl << endl;
 	for (int i = 0; i < 3; i++) {
 		cout << i + 1;
 		for (int j = 0; j < 3; j++) {
@@ -66,22 +66,24 @@ void TicTacToe::displayBoard() {//Where to get the board data?
 }
 
 bool TicTacToe::isValidMove(int x, int y) {//Add your code to complete the program
-	std::cout << "calling is ValidMove()" << std::endl;
-	// check if the input is within valid range
-	if (x >= 0 && x < 3 && y >= 0 && y < 3) //Add your code here)
-		std::cout << "move in within valid range" << std::endl;
-		// check if the cell is occupied by either player
+	// check if the cell is within valid range
+	if (x >= 0 && x < 3 && y >= 0 && y < 3) { //Add your code here)
+		// check if the cell is occupied
 		if (board[x][y] == 1 || board[x][y] == -1) {
-			return false;
-		}
-	else
+				cout << "error: cell is occupied" << endl;
+				cout << "enter valid move:";
+				return false;
+			}
+	} else {
+		cout << "error: cell is not within range" << endl;
+		cout << "enter valid move:";
 		return false;
-	
-	std::cout << "move is not valid" << std::endl;
+	}
+
 	return true;
 }
 
-bool TicTacToe::getXOMove(int &x, int &y) {//What does & mean?
+bool TicTacToe::getOMove(int &x, int &y) {//What does & mean?
 	/*
 		A: address-of operator used to define a call-by reference parameter
 	*/
@@ -100,30 +102,19 @@ bool TicTacToe::getXOMove(int &x, int &y) {//What does & mean?
 	return true;
 }
 
-// getXMove assigns a random move to x and y
 bool TicTacToe::getXMove(int &x, int &y) {
-	if (noOfMoves >= 9)
+	if (noOfMoves >= 9) {
 		return false;
+	}
 
-	// seed
-	srand(time(0));
+	// rng seed
+	std::srand(time(0));
 
-	x = rand() % BOARDSIZE + 1;
-	y = rand() % BOARDSIZE + 1;
-
-	return true;
-}
-
-// getOMove gets the x and y move from the human player
-bool TicTacToe::getOMove(int &x, int &y) {
-	if (noOfMoves >= 9)
-		return false;
-	
 	int row, col;
 	do {
-		cin >> row >> col;
-		cout << endl;
-	} while (!isValidMove(row - 1, col - 1));
+		row = rand() % BOARDSIZE + 1;
+		col = rand() % BOARDSIZE + 1;
+	} while (!isValidMove(row-1, col-1));
 	x = row - 1;
 	y = col - 1;
 
@@ -141,86 +132,19 @@ void TicTacToe::addMove(int x, int y, int player) {//What is this function for?
 
 int TicTacToe::gameStatus() {//Add your code to complete the program
 	//Write your code here to check if the game has been in a win status or a draw status
-	const int WIN = 3;
-	
+
 	//Check rows for a win
+	
 
 	//Add your code here
-	for (int row = 0; row < BOARDSIZE; row++) {
-		int symbolCount = 0;
-
-		for (int col = 0; col < BOARDSIZE; col++) {
-			// TODO: this only checks player X symbols, how to check O?
-			if (board[row][col] == 1) {
-				++symbolCount;
-
-				if (symbolCount == WIN) {
-					return 1;
-				}
-			} else {
-				symbolCount = 0;
-			}
-		}
-	}
 
 	//Check columns for a win
 
 	//Add your code here
-	for (int col = 0; col < BOARDSIZE; col++) {
-		int symbolCount = 0;
-
-		for (int row = 0; row < BOARDSIZE; col++) {
-			if (board[row][col] == 1) {
-				++symbolCount;
-
-				if (symbolCount == WIN) {
-					return 1;
-				}
-			} else {
-				symbolCount = 0;
-			}
-		}
-	}
 
 	//Check diagonals for a win
-	
+
 	//Add your code here
-	// check top-left to bottom-right
-	for (int row = 0; row <= BOARDSIZE - WIN; row++) {
-		for (int col = 0; col <= BOARDSIZE - WIN; col++) {
-			int symbolCount = 0;
-
-			for (int i = 0; i < WIN; i++) {
-				if (board[row + i][col + i] == 1) {
-					++symbolCount;
-					if (symbolCount == WIN) {
-						return 1;
-					}
-				} else {
-					symbolCount = 0;
-				}
-			}
-		}
-	}
-
-	// check top-right to bottom-left
-	for (int row = 0; row <= BOARDSIZE - WIN; row++) {
-		for (int col = 0; col <= BOARDSIZE; col++) {
-			int symbolCount = 0;
-
-			for (int i = 0; i < WIN; i++) {
-				if (board[row + i][col - i] == 1) {
-					++symbolCount;
-
-					if (symbolCount == WIN) {
-						return 1;
-					}
-				} else {
-					symbolCount = 0;
-				}
-			}
-		}
-	}
 
 	if (noOfMoves >= 9)
 		return 2;
@@ -232,25 +156,23 @@ int TicTacToe::play() {//What is the counterpart of this function in the origina
 	/*
 		A: The main() function in Task3_2n3.cpp
 	*/
-
 	int player = 1;
 
 	displayBoard();
 	int done = 0;
 	while (done == 0) {
-		int x, y;
 		char playerSymbol = (player == 1) ? 'X' : 'O';
-		cout << "Player " << playerSymbol << " enter move: ";
+		cout << endl << "Player " << playerSymbol << " enter move: ";
+		int x, y;
 
-		// getXMove(x,y);
-		// getOMove(x,y);
-
-		getXOMove(x, y);
+		if (player != -1) {
+			getXMove(x, y);
+		} else {
+			getOMove(x, y);
+		}
 
 		addMove(x, y, player);
-
 		noOfMoves++;
-		
 		displayBoard();
 
 		done = gameStatus();
@@ -273,5 +195,7 @@ int TicTacToe::play() {//What is the counterpart of this function in the origina
 
 	return 0;
 }
+
+
 
 #endif /* TICTACTOE_H_ */

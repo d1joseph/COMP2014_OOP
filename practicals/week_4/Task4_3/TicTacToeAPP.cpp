@@ -7,7 +7,6 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
-#include <cstdlib>
 
 using namespace std;
 
@@ -15,7 +14,7 @@ using namespace std;
 
 int main() {
 	TicTacToe game; //What does this statement mean?
-	// A: instantiate a game object with class TicTacToe
+	// A: instantiate a game object of the TicTacToe class
 	game.play();
 
 	return 0;

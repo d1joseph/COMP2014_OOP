@@ -14,6 +14,7 @@ class TicTacToe {
 private:
 	int board[BOARDSIZE][BOARDSIZE];
 	int noOfMoves;
+	const int WIN = 3;
 public:
 	TicTacToe();
 	bool isValidMove(int, int);
@@ -134,17 +135,81 @@ int TicTacToe::gameStatus() {//Add your code to complete the program
 	//Write your code here to check if the game has been in a win status or a draw status
 
 	//Check rows for a win
-	
+	for (int row = 0; row < BOARDSIZE; row++) {
+        int symbolCount = 0;
 
-	//Add your code here
+        for (int col = 0; col < BOARDSIZE; col++) {
+            // access and process elements here
+            if (board[row][col] == 1) {
+                ++symbolCount;
+                
+                if (symbolCount == WIN) {
+                    cout << "win found at position " << row + 1 << ", " << col + 1 << endl;
+                    return 1;
+                }
+            } else {
+                symbolCount = 0;
+            }
+        }
+    }
 
 	//Check columns for a win
+	for (int col = 0; col < BOARDSIZE; col++) {
+        int symbolCount = 0;
 
-	//Add your code here
+        for (int row = 0; row < BOARDSIZE; row++) {
+            if (board[row][col] == 1) {
+                ++symbolCount;
+                
+                if (symbolCount == WIN) {
+                    cout << "win found at position " << col + 1 << ", " << row + 1 << endl;
+                    return 1;
+                }
+            } else {
+                symbolCount = 0;
+            }
+        }
+    }
 
 	//Check diagonals for a win
+	// check top-left to bottom-right
+	for (int row = 0; row <= BOARDSIZE - WIN; ++row) {
+        for (int col = 0; col <= BOARDSIZE - WIN; ++col) {
+            int symbolCount = 0;
+            
+            for (int i = 0; i < WIN; ++i) {
+                if (board[row + i][col + i] == 1) { // Assuming you're looking for the value 1
+                    ++symbolCount;
+                    if (symbolCount == WIN) {
+                        cout << "win found at position " << row + 1 << ", " << col + 1 << endl;
+                        return 1;
+                    }
+                } else {
+                    symbolCount = 0;
+                }
+            }
+        }
+    }
 
-	//Add your code here
+	// check top-right to bottom-left
+	for (int row = 0; row <= BOARDSIZE - WIN; ++row) {
+        for (int col = WIN - 1; col < BOARDSIZE; ++col) {
+            int symbolCount = 0;
+            
+            for (int i = 0; i < WIN; ++i) {
+                if (board[row + i][col - i] == 1) {
+                    ++symbolCount;
+
+                    if (symbolCount == WIN) {
+                        cout << "win found at position " << col + 1 << ", " << row + 1 << endl;
+                        return 1;
+                    }
+                } else {
+                    symbolCount = 0;
+                }
+            }
+        }
+    }
 
 	if (noOfMoves >= 9)
 		return 2;

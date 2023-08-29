@@ -2,7 +2,11 @@
 .env
 *.exe
 
-# folder
+# folders
 .vscode/
 docs/
 bin/
+TicTacToe/
+MonteCarlo/
+MiniMax/
+AITicTacToe/

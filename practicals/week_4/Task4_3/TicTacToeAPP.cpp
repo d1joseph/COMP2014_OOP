@@ -14,6 +14,7 @@ using namespace std;
 
 int main() {
 	TicTacToe game; //What does this statement mean?
+	
 	// A: instantiate a game object of the TicTacToe class
 	game.play();
 

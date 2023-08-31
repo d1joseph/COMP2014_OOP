@@ -8,6 +8,11 @@
 #ifndef TICTACTOE_H_
 #define TICTACTOE_H_
 
+#include <iostream>
+#include <iomanip>
+
+using namespace std;
+
 const int BOARDSIZE = 3;
 
 class TicTacToe {

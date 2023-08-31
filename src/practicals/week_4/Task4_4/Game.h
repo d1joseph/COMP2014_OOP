@@ -1,18 +1,25 @@
-#include "TicTacToe.h"
+#include "..\Task4_3\TicTacToe.h"
+
 #include <iostream>
 
 using namespace std;
 
 class Game {
 public:
+	Game();
     void play();
     void getXMove(char player, int&, int&);
     void getOMove(char player, int&, int&);
 private:
     TicTacToe board;
+	int noOfMoves;
 };
 
-void getXMove(char player, int &x, int &y) {
+Game::Game() {
+	noOfMoves = 0;
+}
+
+void Game::getXMove(char player, int &x, int &y) {
     if (noOfMoves >= 9) {
 		return false;
 	}
@@ -24,33 +31,34 @@ void getXMove(char player, int &x, int &y) {
 	do {
 		row = rand() % BOARDSIZE + 1;
 		col = rand() % BOARDSIZE + 1;
-	} while (!isValidMove(row-1, col-1));
+	} while (!board.isValidMove(row-1, col-1));
 	x = row - 1;
 	y = col - 1;
 
 	return true;
 }
 
-void getOMove(char player, int &x, int &y) {
-    
-	if (noOfMoves >= 9)
+void Game::getOMove(char player, int &x, int &y) {
+	if (noOfMoves >= 9) {
 		return false;
+	}
 
 	int row, col;
 	do {
 		cin >> row >> col;
 		cout << endl;
-	} while (!isValidMove(row - 1, col - 1));
+	} while (!board.isValidMove(row - 1, col - 1));
 	x = row - 1;
 	y = col - 1;
 
 	return true;
 }
 
-void play() {
+void Game::play() {
     int player = 1;
 
-	TicTacToe::displayBoard();
+	board.displayBoard();
+
 	int done = 0;
 	while (done == 0) {
 		char playerSymbol = (player == 1) ? 'X' : 'O';
@@ -58,16 +66,18 @@ void play() {
 		int x, y;
 
 		if (player != -1) {
-			getXMove(x, y);
+			getXMove(playerSymbol, x, y);
 		} else {
-			getOMove(x, y);
+			getOMove(playerSymbol, x, y);
 		}
 
-		addMove(x, y, player);
+		board.addMove(x, y, player);
+		
 		noOfMoves++;
-		displayBoard();
+		
+		board.displayBoard();
 
-		done = gameStatus();
+		done = board.gameStatus();
 		if (done == 1) {
 			cout << "Player X wins!" << endl;
 			return 1;

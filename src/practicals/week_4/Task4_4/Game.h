@@ -1,8 +1,7 @@
+#ifndef GAME_H_
+#define GAME_H_
+
 #include "..\Task4_3\TicTacToe.h"
-
-#include <iostream>
-
-using namespace std;
 
 class Game {
 public:
@@ -98,3 +97,4 @@ void Game::play() {
 	return 0;
 }
 
+#endif // GAME_H_

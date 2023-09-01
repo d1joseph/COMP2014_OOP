@@ -19,13 +19,6 @@ public:
 		noOfMoves = 0;
 	}
 
-	TicTacToe(const TicTacToe &cboard) { //Copy constructor.
-		for (int row = 0; row < 3; row++)
-			for (int col = 0; col < 3; col++)
-				board[row][col] = cboard.board[row][col];
-		noOfMoves = cboard.noOfMoves;
-	}
-
 	void displayBoard() const;
 	//Function to print the board.
 

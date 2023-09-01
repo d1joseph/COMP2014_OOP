@@ -4,7 +4,7 @@
 using namespace std;
 
 int main() {
-    NBTicTacToe game(1,1);
+    NBTicTacToe game(0,0);
 
     game.play();
 

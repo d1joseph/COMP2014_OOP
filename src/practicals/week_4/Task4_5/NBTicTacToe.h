@@ -21,7 +21,6 @@ public:
 	void getXMove(char player, int&, int&);
 	void getOMove(char player, int&, int&);
 	void switchBoard(int, int);
-	void displayBoard(); // display the 3x3 board of TicTacToe instances
 private:
 	TicTacToe grid[3][3]; // 2d array of TicTacToe instances
 	Coordinate currentBoard;
@@ -30,7 +29,7 @@ private:
 void NBTicTacToe::getXMove(char player, int &row, int &col) {
 	// rng seed
 	std::srand(time(0));
-
+    
 	int r, c;
 	do {
 		r = rand() % 3 + 1;
@@ -38,7 +37,6 @@ void NBTicTacToe::getXMove(char player, int &row, int &col) {
 	} while (!grid[currentBoard.x][currentBoard.y].isValidMove(r-1, c-1));
 	row = r;
 	col = c;
-
 }
 
 void NBTicTacToe::getOMove(char player, int &row, int &col) {
@@ -60,14 +58,18 @@ void NBTicTacToe::switchBoard(int x, int y) {
 void NBTicTacToe::play() {
 	bool done = false;
 	char player = 'X';
-
-	std::srand(time(0));
-
+	
 	grid[currentBoard.x][currentBoard.y].displayBoard();
-
 	while (!done) {
 		int row, col;
+
+    
+		std::cout << "current board: [" << currentBoard.x << "]"
+		<< "[" << currentBoard.y << "]" << std::endl;
 		if (player == 'X') {
+			// rng seed
+			std::srand(time(0));
+			
 			// choose a random board to play at beginning of X turn
 			int randX = std::rand() % 3;
 			int randY = std::rand() % 3;
@@ -87,23 +89,6 @@ void NBTicTacToe::play() {
 		else	
 			player = 'X';
 	}
-}
-
-void NBTicTacToe::displayBoard() {
-	// use approach from task 3.4 to display board[3][3]
-	for (int row = 0; row < 9; row++) {
-		for (int col = 0; col < 9; col++) {
-			std::cout << grid[currentBoard.x][currentBoard.y];			
-			if ((col+1) % 3 == 0) {
-				std::cout << " ";
-			}
-		}
-		std::cout << std::endl;
-		if ((row+1) % 3 == 0) {
-			std::cout << std::endl;
-		}
-	}
-
 }
 
 #endif // NBTICTACTOE_H_

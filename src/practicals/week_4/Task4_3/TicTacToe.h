@@ -183,7 +183,7 @@ int TicTacToe::gameStatus() {//Add your code to complete the program
             int symbolCount = 0;
             
             for (int i = 0; i < WIN; ++i) {
-                if (board[row + i][col + i] == 1) { // Assuming you're looking for the value 1
+                if (board[row + i][col + i] == 1) {
                     ++symbolCount;
                     if (symbolCount == WIN) {
                         cout << "win found at position " << row + 1 << ", " << col + 1 << endl;

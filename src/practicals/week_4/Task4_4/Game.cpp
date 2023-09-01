@@ -1,12 +1,14 @@
 #include "Game.h"
+#include "TicTacToe.h"
 #include <iostream>
 
 using namespace std;
 
 int main() {
-    Game newGame;
+    
+    Game game;
 
-    newGame.play();
+    game.play();
 
     return 0;
 }

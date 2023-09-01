@@ -1,100 +1,65 @@
 #ifndef GAME_H_
 #define GAME_H_
 
-#include "..\Task4_3\TicTacToe.h"
+#include "TicTacToe.h"
+#include <iostream>
 
 class Game {
 public:
-	Game();
-    void play();
-    void getXMove(char player, int&, int&);
-    void getOMove(char player, int&, int&);
+	void play();
+	void getXMove(char player, int&, int&);
+	void getOMove(char player, int&, int&);
 private:
-    TicTacToe board;
-	int noOfMoves;
+	TicTacToe board;
 };
 
-Game::Game() {
-	noOfMoves = 0;
-}
-
-void Game::getXMove(char player, int &x, int &y) {
-    if (noOfMoves >= 9) {
-		return false;
-	}
-
+void Game::getXMove(char player, int& row, int& col) {
 	// rng seed
-	srand(time(0));
+	std::srand(time(0));
 
-	int row, col;
+	int r, c;
 	do {
-		row = rand() % BOARDSIZE + 1;
-		col = rand() % BOARDSIZE + 1;
-	} while (!board.isValidMove(row-1, col-1));
-	x = row - 1;
-	y = col - 1;
+		r = rand() % 3 + 1;
+		c = rand() % 3 + 1;
+	} while (!board.isValidMove(r-1, c-1));
+	row = r - 1;
+	col = c - 1;
 
-	return true;
 }
 
-void Game::getOMove(char player, int &x, int &y) {
-	if (noOfMoves >= 9) {
-		return false;
-	}
-
-	int row, col;
+void Game::getOMove(char player, int& row, int& col) {
 	do {
-		cin >> row >> col;
-		cout << endl;
+		std::cout << "Player " << player << " enter move: ";
+		std::cin >> row >> col;
+		std::cout << std::endl;
 	} while (!board.isValidMove(row - 1, col - 1));
-	x = row - 1;
-	y = col - 1;
 
-	return true;
+	row--;
+	col--;
 }
 
 void Game::play() {
-    int player = 1;
+	bool done = false;
+	char player = 'X';
 
 	board.displayBoard();
 
-	int done = 0;
-	while (done == 0) {
-		char playerSymbol = (player == 1) ? 'X' : 'O';
-		cout << endl << "Player " << playerSymbol << " enter move: ";
-		int x, y;
+	while (!done) {
+		int row, col;
+		if (player == 'X')
+			getXMove(player, row, col);
+		else
+			getOMove(player, row, col);
 
-		if (player != -1) {
-			getXMove(playerSymbol, x, y);
-		} else {
-			getOMove(playerSymbol, x, y);
-		}
+		done = board.addMove(player, row, col);
 
-		board.addMove(x, y, player);
-		
-		noOfMoves++;
-		
 		board.displayBoard();
 
-		done = board.gameStatus();
-		if (done == 1) {
-			cout << "Player X wins!" << endl;
-			return 1;
-		} else if (done == -1) {
-			cout << "Player O wins!" << endl;
-			return -1;
-		} else if (done == 2) {
-			cout << "Draw game!" << endl;
-			return 0;
-		}
-
-		if (player == 1)
-			player = -1;
+		if (player == 'X')
+			player = 'O';
 		else
-			player = 1;
+			player = 'X';
 	}
-
-	return 0;
 }
 
 #endif // GAME_H_

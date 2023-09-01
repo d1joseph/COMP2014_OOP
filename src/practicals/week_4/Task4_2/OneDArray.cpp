@@ -5,7 +5,7 @@
 **/
 
 #include <iostream>
-#include "Task4_2.h"
+#include "OneDArray.h"
 
 using namespace std;
 

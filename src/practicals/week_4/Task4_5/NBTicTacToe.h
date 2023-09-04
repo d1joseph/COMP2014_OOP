@@ -21,6 +21,7 @@ public:
 	void getXMove(char player, int&, int&);
 	void getOMove(char player, int&, int&);
 	void switchBoard(int, int);
+	void displayBoard();
 private:
 	TicTacToe grid[3][3]; // 2d array of TicTacToe instances
 	Coordinate currentBoard;
@@ -55,15 +56,38 @@ void NBTicTacToe::switchBoard(int x, int y) {
 	currentBoard.y = y;
 }
 
+void NBTicTacToe::displayBoard() {
+	for (int i = 0; i < 9; i++) {
+		for (int j = 0; j < 9; j++) {
+			char symbol;
+
+			if (grid[i][j] == 'X')
+				symbol = 'X';
+			else if (grid[i][j] == 'O')
+				symbol = 'O';
+			else
+				symbol = '_';
+			
+			cout << symbol;			
+			if ((j+1) % 3 == 0) {
+				cout << " ";
+			}
+		}
+		cout << endl;
+		if ((i+1) % 3 == 0) {
+			cout << endl;
+		}
+	}
+}
+
 void NBTicTacToe::play() {
 	bool done = false;
 	char player = 'X';
 	
-	grid[currentBoard.x][currentBoard.y].displayBoard();
+	displayBoard();
 	while (!done) {
 		int row, col;
 
-    
 		std::cout << "current board: [" << currentBoard.x << "]"
 		<< "[" << currentBoard.y << "]" << std::endl;
 		if (player == 'X') {
@@ -82,7 +106,7 @@ void NBTicTacToe::play() {
 		}
 
 		done = grid[currentBoard.x][currentBoard.y].addMove(player, row, col);
-		grid[currentBoard.x][currentBoard.y].displayBoard();
+		displayBoard();
 
 		if (player == 'X')
 			player = 'O';

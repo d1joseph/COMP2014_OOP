@@ -27,17 +27,20 @@ public:
 	}
 
 	void displayBoard() const;
-	//Function to print the board.
+	// Function to print the board.
 
 	bool isValidMove(int x, int y) const;
-	//Function to determine if a move is valid.
+	// Function to determine if a move is valid.
 
 	void getXOMove(char moveSymbol, int&, int&);
-	//Function to get a move for player X
+	// Function to get a move for player X
 
 	bool addMove(char playerSymbol, int, int);
 
 	status gameStatus();
+
+	char getCellValue(int x, int y);
+	// Function to get the char value in cell
 
 	void play();
 
@@ -123,6 +126,9 @@ bool TicTacToe::addMove(char playerSymbol, int row, int col) {
 		return true;
 	} else
 		return false;
+}
+char TicTacToe::getCellValue(int x, int y) {
+	return board[x][y];
 }
 
 status TicTacToe::gameStatus() {

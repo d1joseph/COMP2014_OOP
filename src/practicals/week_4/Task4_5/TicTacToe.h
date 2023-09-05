@@ -1,162 +1,280 @@
+/*
+ * TicTacToe.h
+ *
+ *  Created on: 5 Aug 2023
+ *      Author: 2002345
+ */
+
 #ifndef TICTACTOE_H_
 #define TICTACTOE_H_
 
 #include <iostream>
+#include <iomanip>
 
-enum status {
-	WIN, DRAW, CONTINUE
-};
+using namespace std;
+
+const int BOARDSIZE = 3;
 
 class TicTacToe {
-
-public:
-	TicTacToe() { //Default constructor.
-		for (int row = 0; row < 3; row++)
-			for (int col = 0; col < 3; col++) {
-				board[row][col] = ' ';
-			}
-
-		noOfMoves = 0;
-	}
-
-	TicTacToe(const TicTacToe &cboard) { //Copy constructor.
-		for (int row = 0; row < 3; row++)
-			for (int col = 0; col < 3; col++)
-				board[row][col] = cboard.board[row][col];
-		noOfMoves = cboard.noOfMoves;
-	}
-
-	void displayBoard() const;
-	// Function to print the board.
-
-	bool isValidMove(int x, int y) const;
-	// Function to determine if a move is valid.
-
-	void getXOMove(char moveSymbol, int&, int&);
-	// Function to get a move for player X
-
-	bool addMove(char playerSymbol, int, int);
-
-	status gameStatus();
-
-	char getCellValue(int x, int y);
-	// Function to get the char value in cell
-
-	void play();
-
 private:
-	char board[3][3];
+	int board[BOARDSIZE][BOARDSIZE];
 	int noOfMoves;
+	const int WIN = 3;
+public:
+	TicTacToe();
+	bool isValidMove(int, int);
+	bool getXOMove(int&, int&);
+	bool getXMove(int&, int&);
+	bool getOMove(int&, int&);
+	void addMove(int, int, int);
+	void incrementMoves();
+	int getMoveCount();
+	int gameStatus();
+	int play();
+	void displayBoard();
 };
 
-void TicTacToe::play() {
-	bool done = false;
-	char player = 'X';
-
-	displayBoard();
-
-	while (!done) {
-		int row, col;
-		if (player == 'X')
-			getXOMove(player, row, col);
-		else
-			getXOMove(player, row, col);
-
-		done = addMove(player, row, col);
-
-		displayBoard();
-
-		if (player == 'X')
-			player = 'O';
-		else
-			player = 'X';
-	}
-}
-
-void TicTacToe::displayBoard() const {
-	for (int row = 0; row < 3; row++) {
-		for (int col = 0; col < 3; col++) {
-			std::cout << " " << board[row][col];
-			if (col != 2)
-				std::cout << " |";
-		}
-
-		std::cout << std::endl;
-
-		if (row != 2)
-			std::cout << " -   -   - " << std::endl;
-	}
-
-	std::cout << std::endl;
-}
-
-bool TicTacToe::isValidMove(int row, int col) const {
-	if (0 <= row && row <= 2 && 0 <= col && col <= 2 && board[row][col] == ' ')
-		return true;
-	else
-		return false;
-}
-
-void TicTacToe::getXOMove(char playerSymbol, int &row, int &col) {
-	do {
-		std::cout << "Player " << playerSymbol << " enter move: ";
-		std::cin >> row >> col;
-		std::cout << std::endl;
-	} while (!isValidMove(row - 1, col - 1));
-
-	row--;
-	col--;
-}
-
-bool TicTacToe::addMove(char playerSymbol, int row, int col) {
-	noOfMoves++;
-
-	board[row][col] = playerSymbol;
-//	displayBoard();
-
-	status gStatus = gameStatus();
-
-	if (gStatus == WIN) {
-		std::cout << "Player " << playerSymbol << " wins!" << std::endl;
-		return true;
-	} else if (gStatus == DRAW) {
-		std::cout << "This game is a draw!" << std::endl;
-		return true;
-	} else if (noOfMoves >= 9) {
-		return true;
-	} else
-		return false;
-}
-char TicTacToe::getCellValue(int x, int y) {
-	return board[x][y];
-}
-
-status TicTacToe::gameStatus() {
-	//Check rows for a win
+TicTacToe::TicTacToe() {//How to call this function?
+	/*
+		A: constructor for TicTacToe, call wherever we want to
+		instantiate the game board object e.g. int main {TicTacToe tictactoe; return 0;}
+	*/
 	for (int row = 0; row < 3; row++)
-		if (board[row][0] != ' ' && (board[row][0] == board[row][1])
-				&& (board[row][1] == board[row][2]))
-			return WIN;
+		for (int col = 0; col < 3; col++)
+			board[row][col] = 0;
+
+	noOfMoves = 0;
+}
+
+void TicTacToe::displayBoard() {//Where to get the board data?
+	/*
+		A: the board data is iniatilised with 0 values when we call the constructor,
+		the board is represented as a 2d array (array of arrays) with the value of 
+		each cell accessed by its 2 indexes; board[i][j] to get the current value 
+		stored by iterating through the boardusing a nested for loop.
+	*/
+	cout << endl << "   1    2    3" << endl << endl;
+	for (int i = 0; i < 3; i++) {
+		cout << i + 1;
+		for (int j = 0; j < 3; j++) {
+			char playerSymbol = ' ';
+			if (board[i][j] == 1)
+				playerSymbol = 'X';
+			else if (board[i][j] == -1)
+				playerSymbol = 'O';
+			cout << setw(3) << playerSymbol;
+			if (j != 2)
+				cout << " |";
+		}
+		cout << endl;
+		if (i != 2)
+			cout << " ____|____|____" << endl << "     |    |    " << endl;
+	}
+	cout << endl;
+}
+
+bool TicTacToe::isValidMove(int x, int y) {//Add your code to complete the program
+	// check if the cell is within valid range
+	if (x >= 0 && x < 3 && y >= 0 && y < 3) { //Add your code here)
+		// check if the cell is occupied
+		if (board[x][y] == 1 || board[x][y] == -1) {
+				cout << "error: cell is occupied" << endl;
+				cout << "enter valid move:";
+				return false;
+			}
+	} else {
+		cout << "error: cell is not within range" << endl;
+		cout << "enter valid move:";
+		return false;
+	}
+
+	return true;
+}
+
+bool TicTacToe::getOMove(int &x, int &y) {//What does & mean?
+	/*
+		A: address-of operator used to define a call-by reference parameter
+	*/
+
+	if (noOfMoves >= 9)
+		return false;
+
+	int row, col;
+	do {
+		cin >> row >> col;
+		cout << endl;
+	} while (!isValidMove(row - 1, col - 1));
+	x = row - 1;
+	y = col - 1;
+
+	return true;
+}
+
+bool TicTacToe::getXMove(int &x, int &y) {
+	if (noOfMoves >= 9) {
+		return false;
+	}
+
+	// rng seed
+	std::srand(time(0));
+
+	int row, col;
+	do {
+		row = rand() % BOARDSIZE + 1;
+		col = rand() % BOARDSIZE + 1;
+	} while (!isValidMove(row-1, col-1));
+	x = row - 1;
+	y = col - 1;
+
+	return true;
+}
+
+void TicTacToe::addMove(int x, int y, int player) {//What is this function for?
+	/*
+		A: adds the current player's 'X' or 'O' marker represented by a 1 or -1 to that
+		player's chosen cell at position x, y, can only be used if TicTacToe.isValidMove() 
+		returns true
+	*/
+	board[x][y] = player;
+}
+
+int TicTacToe::gameStatus() {//Add your code to complete the program
+	//Write your code here to check if the game has been in a win status or a draw status
+
+	//Check rows for a win
+	for (int row = 0; row < BOARDSIZE; row++) {
+        int symbolCount = 0;
+
+        for (int col = 0; col < BOARDSIZE; col++) {
+            // access and process elements here
+            if (board[row][col] == 1) {
+                ++symbolCount;
+                
+                if (symbolCount == WIN) {
+                    cout << "win found at position " << row + 1 << ", " << col + 1 << endl;
+                    return 1;
+                }
+            } else {
+                symbolCount = 0;
+            }
+        }
+    }
 
 	//Check columns for a win
-	for (int col = 0; col < 3; col++)
-		if (board[0][col] != ' ' && (board[0][col] == board[1][col])
-				&& (board[1][col] == board[2][col]))
-			return WIN;
+	for (int col = 0; col < BOARDSIZE; col++) {
+        int symbolCount = 0;
+
+        for (int row = 0; row < BOARDSIZE; row++) {
+            if (board[row][col] == 1) {
+                ++symbolCount;
+                
+                if (symbolCount == WIN) {
+                    cout << "win found at position " << col + 1 << ", " << row + 1 << endl;
+                    return 1;
+                }
+            } else {
+                symbolCount = 0;
+            }
+        }
+    }
 
 	//Check diagonals for a win
-	if (board[0][0] != ' ' && (board[0][0] == board[1][1])
-			&& (board[1][1] == board[2][2]))
-		return WIN;
+	// check top-left to bottom-right
+	for (int row = 0; row <= BOARDSIZE - WIN; ++row) {
+        for (int col = 0; col <= BOARDSIZE - WIN; ++col) {
+            int symbolCount = 0;
+            
+            for (int i = 0; i < WIN; ++i) {
+                if (board[row + i][col + i] == 1) {
+                    ++symbolCount;
+                    if (symbolCount == WIN) {
+                        cout << "win found at position " << row + 1 << ", " << col + 1 << endl;
+                        return 1;
+                    }
+                } else {
+                    symbolCount = 0;
+                }
+            }
+        }
+    }
 
-	if (board[2][0] != ' ' && (board[2][0] == board[1][1])
-			&& (board[1][1] == board[0][2]))
-		return WIN;
+	// check top-right to bottom-left
+	for (int row = 0; row <= BOARDSIZE - WIN; ++row) {
+        for (int col = WIN - 1; col < BOARDSIZE; ++col) {
+            int symbolCount = 0;
+            
+            for (int i = 0; i < WIN; ++i) {
+                if (board[row + i][col - i] == 1) {
+                    ++symbolCount;
 
-	if (noOfMoves < 9)
-		return CONTINUE;
+                    if (symbolCount == WIN) {
+                        cout << "win found at position " << col + 1 << ", " << row + 1 << endl;
+                        return 1;
+                    }
+                } else {
+                    symbolCount = 0;
+                }
+            }
+        }
+    }
 
-	return DRAW;
+	if (noOfMoves >= 9)
+		return 2;
+
+	return 0;
 }
+
+void TicTacToe::incrementMoves() {
+	noOfMoves++;
+}
+
+int TicTacToe::getMoveCount() {
+	return noOfMoves;
+}
+
+int TicTacToe::play() {//What is the counterpart of this function in the original code
+    /*
+		A: The main() function in Task3_2n3.cpp
+	*/
+	int player = 1;
+
+	displayBoard();
+	int done = 0;
+	while (done == 0) {
+		char playerSymbol = (player == 1) ? 'X' : 'O';
+		cout << endl << "Player " << playerSymbol << " enter move: ";
+		int x, y;
+
+		if (player != -1) {
+			getXMove(x, y);
+		} else {
+			getOMove(x, y);
+		}
+
+		addMove(x, y, player);
+		noOfMoves++;
+		displayBoard();
+
+		done = gameStatus();
+		if (done == 1) {
+			cout << "Player X wins!" << endl;
+			return 1;
+		} else if (done == -1) {
+			cout << "Player O wins!" << endl;
+			return -1;
+		} else if (done == 2) {
+			cout << "Draw game!" << endl;
+			return 0;
+		}
+
+		if (player == 1)
+			player = -1;
+		else
+			player = 1;
+	}
+
+	return 0;
+
+
 
 #endif /* TICTACTOE_H_ */

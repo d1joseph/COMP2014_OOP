@@ -19,7 +19,8 @@ using namespace std;
 using namespace std;
 
 int main() {
-    NBTicTacToe game;
+    // NBTicTacToe game;
+    TicTacToe game;
     game.play();
 
     return 0;

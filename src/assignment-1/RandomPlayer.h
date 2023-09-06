@@ -10,4 +10,25 @@ is lost or damaged.
 #ifndef RANDOMPLAYER_H_
 #define RANDOMPLAYER_H_
 
+class RandomPlayer {
+public:
+    void getXMove(TicTacToe board, int&, int&);
+}
+
+void RandomPlayer::getXMove(TicTacToe, int&, int&) {
+    if (board.getMoveCount() >= 9) {
+        return;
+	}
+
+	srand(time(0));
+
+	int row, col;
+	do {
+		row = rand() % BOARDSIZE + 1;
+		col = rand() % BOARDSIZE + 1;
+	} while (!board.isValidMove(row-1, col-1));
+	x = row - 1;
+	y = col - 1;
+}
+
 #endif // RANDOMPLAYER_H_

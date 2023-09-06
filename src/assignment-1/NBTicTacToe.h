@@ -24,29 +24,32 @@ public:
 };
 
 int NBTicTacToe::play() {
+    cout << "calling NBTicTacToe::play()" << endl;
+
     displayBoards();
-    cout << "playing NBTicTacToe" << endl;
+
     return 0;
 }
 
 void NBTicTacToe::displayBoards() {
-    cout << "Display 3x3 TicTacToe boards" << endl << endl;
+    cout << "calling NBTicTacToe::displayBoards()" << endl << endl;
+
     for (int row = 0; row < BOARDSIZE; row++) {
-        for (int i = 0; i < 3; i++) { // loop for each row in the board
+        for (int i = 0; i < BOARDSIZE; i++) { // loop for each row in the board
             for (int col = 0; col < BOARDSIZE; col++) {
-                for (int j = 0; j < 3; j++) { // loop for each cell in a row                    
+                for (int j = 0; j < BOARDSIZE; j++) { // loop for each cell in a row                    
                     
-                    // get all current cells values for each board instance
+                    // get cell values for each board instance
                     vector<int> positions = boards[row][col].getCellValues();
 
                     char playerSymbol = ' ';
-                    if (positions[i * 3 + j] == 1) {
+                    if (positions[i * BOARDSIZE + j] == 1) {
                         playerSymbol = 'X';
-                    } else if (positions[i * 3 + j] == -1) {
+                    } else if (positions[i * BOARDSIZE + j] == -1) {
                         playerSymbol = 'O';
                     }
                     
-                    // Print borders around the cell
+                    // cell borders
                     if (j == 0) {
                         cout << " ";   
                     }
@@ -59,20 +62,19 @@ void NBTicTacToe::displayBoards() {
                 }
 
                 if (col < BOARDSIZE - 1) {
-                    cout << " "; // separation between boards
+                    cout << "  "; // padding between boards
                 }    
             }
             cout << endl;
         }
 
-        // Print board row dividers
+        // row dividers
         if (row < BOARDSIZE - 1) {
-            for (int i = 0; i < 26; i++) {
+            for (int i = 0; i < 28; i++) {
                 cout << "-";
             }
             cout << endl;
         }
     }
 }
-
 #endif // NBTICTACTOE_H_

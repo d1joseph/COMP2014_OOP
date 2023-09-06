@@ -9,4 +9,22 @@ is lost or damaged.
 #ifndef HUMANPLAYER_H_
 #define HUMANPLAYER_H_
 
+class Human {
+public:
+    void getOMove(TicTacToe board, int&, int&);
+}
+
+void Human::getOMove(TicTacToe board, int& x, int& y) {
+    if (board.getMoveCount() >= 9)
+		return;
+
+	int row, col;
+	do {
+		cin >> row >> col;
+		cout << endl;
+	} while (!board.isValidMove(row - 1, col - 1));
+	x = row - 1;
+	y = col - 1;
+}
+
 #endif // HUMANPLAYER_H_

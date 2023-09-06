@@ -22,6 +22,8 @@ public:
 	bool getOMove(int&, int&);
 	bool getXMove(int&, int&);
     vector<int> getCellValues();
+	int getMoveCount();
+	void incrementMoveCount();
 	void addMove(int, int, int);
 	int gameStatus();
 	int play();
@@ -119,93 +121,102 @@ vector<int> TicTacToe::getCellValues() {
     return positions;
 }
 
+int TicTacToe::getMoveCount() {
+	return noOfMoves;
+}
+
+void TicTacToe::incrementMoveCount() {
+	noOfMoves++;
+}
+
 void TicTacToe::addMove(int x, int y, int player) {//What is this function for?
 	board[x][y] = player;
 }
 
 int TicTacToe::gameStatus() {
-	//Check rows for a win
-	for (int row = 0; row < BOARDSIZE; row++) {
-        int symbolCount = 0;
+    for (int player = 1; player >= -1; player -= 2) {
+        int winSymbol = player;
 
-        for (int col = 0; col < BOARDSIZE; col++) {
-            // access and process elements here
-            if (board[row][col] == 1) {
-                ++symbolCount;
-                
-                if (symbolCount == WIN) {
-                    cout << "win found at position " << row + 1 << ", " << col + 1 << endl;
-                    return 1;
-                }
-            } else {
-                symbolCount = 0;
-            }
-        }
-    }
-
-	//Check columns for a win
-	for (int col = 0; col < BOARDSIZE; col++) {
-        int symbolCount = 0;
-
+        // Check rows for a win
         for (int row = 0; row < BOARDSIZE; row++) {
-            if (board[row][col] == 1) {
-                ++symbolCount;
-                
-                if (symbolCount == WIN) {
-                    cout << "win found at position " << col + 1 << ", " << row + 1 << endl;
-                    return 1;
-                }
-            } else {
-                symbolCount = 0;
-            }
-        }
-    }
-
-	//Check diagonals for a win
-
-	// check top-left to bottom-right
-	for (int row = 0; row <= BOARDSIZE - WIN; ++row) {
-        for (int col = 0; col <= BOARDSIZE - WIN; ++col) {
             int symbolCount = 0;
-            
-            for (int i = 0; i < WIN; ++i) {
-                if (board[row + i][col + i] == 1) {
+
+            for (int col = 0; col < BOARDSIZE; col++) {
+                if (board[row][col] == winSymbol) {
                     ++symbolCount;
+
                     if (symbolCount == WIN) {
-                        cout << "win found at position " << row + 1 << ", " << col + 1 << endl;
-                        return 1;
+                        return winSymbol;
                     }
                 } else {
                     symbolCount = 0;
                 }
             }
         }
-    }
 
-	// check top-right to bottom-left
-	for (int row = 0; row <= BOARDSIZE - WIN; ++row) {
-        for (int col = WIN - 1; col < BOARDSIZE; ++col) {
+        // Check columns for a win
+        for (int col = 0; col < BOARDSIZE; col++) {
             int symbolCount = 0;
-            
-            for (int i = 0; i < WIN; ++i) {
-                if (board[row + i][col - i] == 1) {
+
+            for (int row = 0; row < BOARDSIZE; row++) {
+                if (board[row][col] == winSymbol) {
                     ++symbolCount;
 
                     if (symbolCount == WIN) {
-                        cout << "win found at position " << col + 1 << ", " << row + 1 << endl;
-                        return 1;
+                        return winSymbol;
                     }
                 } else {
                     symbolCount = 0;
                 }
             }
         }
+
+        // Check diagonals for a win
+
+        // Check top-left to bottom-right
+        for (int row = 0; row <= BOARDSIZE - WIN; ++row) {
+            for (int col = 0; col <= BOARDSIZE - WIN; ++col) {
+                int symbolCount = 0;
+
+                for (int i = 0; i < WIN; ++i) {
+                    if (board[row + i][col + i] == winSymbol) {
+                        ++symbolCount;
+
+                        if (symbolCount == WIN) {
+                            return winSymbol;
+                        }
+                    } else {
+                        symbolCount = 0;
+                    }
+                }
+            }
+        }
+
+        // Check top-right to bottom-left
+        for (int row = 0; row <= BOARDSIZE - WIN; ++row) {
+            for (int col = WIN - 1; col < BOARDSIZE; ++col) {
+                int symbolCount = 0;
+
+                for (int i = 0; i < WIN; ++i) {
+                    if (board[row + i][col - i] == winSymbol) {
+                        ++symbolCount;
+
+                        if (symbolCount == WIN) {
+                            return winSymbol;
+                        }
+                    } else {
+                        symbolCount = 0;
+                    }
+                }
+            }
+        }
     }
 
-	if (noOfMoves >= 9)
-		return 2;
+    if (noOfMoves >= 9) {
+        return 2; // Draw
+    }
 
-	return 0;
+    return 0; // Game still in progress
 }
 
 int TicTacToe::play() {

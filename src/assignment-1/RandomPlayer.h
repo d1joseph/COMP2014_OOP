@@ -6,7 +6,8 @@ from any other source.
 I hold a copy of this assignment that I can produce if the original
 is lost or damaged.
 **************************/
-#ifndef HUMANPLAYER_H_
-#define HUMANPLAYER_H_
 
-#endif // HUMANPLAYER_H_
+#ifndef RANDOMPLAYER_H_
+#define RANDOMPLAYER_H_
+
+#endif // RANDOMPLAYER_H_

@@ -6,7 +6,21 @@ from any other source.
 I hold a copy of this assignment that I can produce if the original
 is lost or damaged.
 **************************/
-#ifndef HUMANPLAYER_H_
-#define HUMANPLAYER_H_
 
-#endif // HUMANPLAYER_H_
+#include<iostream>
+#include<iomanip>
+#include<vector>
+
+using namespace std;
+
+#include "TicTacToe.h"
+#include "NBTicTacToe.h"
+
+using namespace std;
+
+int main() {
+    NBTicTacToe game;
+    game.play();
+
+    return 0;
+}

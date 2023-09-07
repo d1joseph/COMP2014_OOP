@@ -12,11 +12,11 @@ is lost or damaged.
 
 class RandomPlayer {
 public:
-    void getXMove(TicTacToe board, int&, int&);
+    void getXMove(TicTacToe board, int&, int&, char);
 };
 
 // board passed as TicTacToe board[currentBoard.x][currentBoard.y]
-void RandomPlayer::getXMove(TicTacToe board, int& x, int& y) {
+void RandomPlayer::getXMove(TicTacToe board, int& x, int& y, char playerSymbol) {
     if (board.getMoveCount() >= 9) {
         return;
 	}

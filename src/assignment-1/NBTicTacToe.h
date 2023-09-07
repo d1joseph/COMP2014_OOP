@@ -9,6 +9,7 @@ is lost or damaged.
 #ifndef NBTICTACTOE_H_
 #define NBTICTACTOE_H_
 
+// Coordinate is a struct to keep track of the current board played in turn
 struct Coordinate {
     int x;
     int y;
@@ -16,18 +17,19 @@ struct Coordinate {
 
 class NBTicTacToe {
 private:
-    TicTacToe boards[3][3];
+    TicTacToe boards[3][3]; // init a 2d array of TicTacToe instances
     Coordinate currentBoard;
 public:
-    void displayBoards(); // displays 3x3 board of TicTacToe games
+        void displayBoards(); // displays 3x3 board of TicTacToe games
     void indicateCurrent(int&, int&); // indicates the board being played in turn
+    void printMovePlayed(int&, int&, char); // prints the move played by the player in turn
     int play();
 };
 
 int NBTicTacToe::play() {
-    cout << "### 9 Board Tic Tac Toe ###" << endl << endl;
+    cout << "### 9 Board Tic Tac Toe ###" << endl;
     
-    int player = 1; // x goes first
+    int player = 1;
     HumanPlayer human;
     RandomPlayer random;
         
@@ -35,45 +37,48 @@ int NBTicTacToe::play() {
     while (done == 0) {
         srand(time(0)); 
 
-
         char playerSymbol = (player == 1) ? 'X' : 'O';
-        cout << "Player " << playerSymbol << " enter move[row][col]: ";
 
         int x, y;
+        indicateCurrent(currentBoard.x, currentBoard.y);
+        
         if (player != -1) {
             int x = rand() % 3;
             int y = rand() % 3;
+            
             // choose a board to play using currentBoard struct;
             currentBoard.x = x;
             currentBoard.y = y;
             
-            cout << endl << "Player X set focus board to board[" << currentBoard.x + 1
-            << "]" << "[" << currentBoard.y + 1 << "]" << endl;
+            cout << endl << "event: player X set focus board to board(" << currentBoard.x + 1
+            << "," << currentBoard.y + 1 << ")" << endl;
             
-            random.getXMove(boards[currentBoard.x][currentBoard.y], x, y);
+            random.getXMove(boards[currentBoard.x][currentBoard.y], x, y, playerSymbol);
         } else {
-            human.getOMove(boards[currentBoard.x][currentBoard.y], x, y);
+            human.getOMove(boards[currentBoard.x][currentBoard.y], x, y, playerSymbol);
         }
 
-        indicateCurrent(currentBoard.x, currentBoard.y);
 
         // add move and increment for focus board
         boards[currentBoard.x][currentBoard.y].addMove(x, y, player);
+        
+        printMovePlayed(x, y, playerSymbol);
+        
         boards[currentBoard.x][currentBoard.y].incrementMoveCount();
         
         displayBoards(); // show latest state of boards
 
         done = boards[currentBoard.x][currentBoard.y].gameStatus();
         if (done == 1) {
-            cout << "Player X wins board[" << currentBoard.x + 1 << "]" << "["
+            cout << "event: Player X wins board[" << currentBoard.x + 1 << "]" << "["
             << currentBoard.y + 1 << "]" << endl;
             return 1;
         } else if (done == -1) {
-            cout << "Player O wins board[" << currentBoard.x + 1 << "]" << "["
+            cout << "event: Player O wins board[" << currentBoard.x + 1 << "]" << "["
             << currentBoard.y + 1 << "]" << endl;
             return -1;
         } else if (done == 2) {
-            cout << "Draw game at board[" << currentBoard.x + 1 << "]" << "["
+            cout << "event: Draw game at board[" << currentBoard.x + 1 << "]" << "["
             << currentBoard.y + 1 << "]" << endl;
             return 0;
         }
@@ -89,8 +94,13 @@ int NBTicTacToe::play() {
 }
 
 void NBTicTacToe::indicateCurrent(int& x, int& y) {
-    cout << endl << "playing board[" << x + 1 << "]"
-    << "[" << y + 1 << "]" << endl;
+    cout << endl << "event: playing board(" << x + 1 << ","
+    << y + 1 << ")" << endl;
+}
+
+void NBTicTacToe::printMovePlayed(int& x, int& y, char player) {
+	cout << "event: player " << player << " plays move: (" << x + 1 << ","
+	<< y + 1 << ")" << endl;
 }
 
 void NBTicTacToe::displayBoards() {

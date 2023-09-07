@@ -19,13 +19,15 @@ private:
     TicTacToe boards[3][3];
     Coordinate currentBoard;
 public:
-        void displayBoards();
+    int play();
+    void displayBoards();
     void indicateCurrent(int&, int&);
     void printMovePlayed(int&, int&, char);
 };
 
 int NBTicTacToe::play() {
     cout << "### 9 Board Tic Tac Toe ###" << endl;    
+    
     int player = 1;
     HumanPlayer human;
     RandomPlayer random;
@@ -38,10 +40,10 @@ int NBTicTacToe::play() {
         int x, y;
     
         if (player != -1) {
-            int row = rand() % 3;
-            int col = rand() % 3;
-            currentBoard.x = row;
-            currentBoard.y = col;
+            int cX = rand() % 3;
+            int cY = rand() % 3;
+            currentBoard.x = cX;
+            currentBoard.y = cY;
 
             random.getXMove(boards[currentBoard.x][currentBoard.y], x, y, playerSymbol);
         } else {

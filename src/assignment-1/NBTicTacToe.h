@@ -27,36 +27,34 @@ public:
 };
 
 int NBTicTacToe::play() {
-    cout << "### 9 Board Tic Tac Toe ###" << endl;
-    
+    cout << "### 9 Board Tic Tac Toe ###" << endl;    
     int player = 1;
     HumanPlayer human;
     RandomPlayer random;
-        
+
+    displayBoards();
     int done = 0;
     while (done == 0) {
-        srand(time(0)); 
-
+        srand(time(0));
         char playerSymbol = (player == 1) ? 'X' : 'O';
-
         int x, y;
-        
+    
         if (player != -1) {
-            int x = rand() % 3;
-            int y = rand() % 3;
-            
-            // choose a board to play using currentBoard struct;
-            currentBoard.x = x;
-            currentBoard.y = y;
-            
-            cout << endl << "event: player X set focus board to board(" << currentBoard.x + 1
-            << "," << currentBoard.y + 1 << ")" << endl;
-            indicateCurrent(currentBoard.x, currentBoard.y);
+            int row = rand() % 3;
+            int col = rand() % 3;
+            currentBoard.x = row;
+            currentBoard.y = col;
+
             random.getXMove(boards[currentBoard.x][currentBoard.y], x, y, playerSymbol);
         } else {
+            indicateCurrent(currentBoard.x, currentBoard.y);
             human.getOMove(boards[currentBoard.x][currentBoard.y], x, y, playerSymbol);
         }
+        
+        cout << endl << "event: player X set focus board to board(" << currentBoard.x + 1
+        << "," << currentBoard.y + 1 << ")" << endl;
 
+        indicateCurrent(currentBoard.x, currentBoard.y);
 
         // add move and increment for focus board
         boards[currentBoard.x][currentBoard.y].addMove(x, y, player);
@@ -64,9 +62,9 @@ int NBTicTacToe::play() {
         printMovePlayed(x, y, playerSymbol);
         
         boards[currentBoard.x][currentBoard.y].incrementMoveCount();
-        
-        displayBoards(); // show latest state of boards
 
+        displayBoards();
+        
         done = boards[currentBoard.x][currentBoard.y].gameStatus();
         if (done == 1) {
             cout << "event: Player X wins board[" << currentBoard.x + 1 << "]" << "["
@@ -86,14 +84,14 @@ int NBTicTacToe::play() {
             player = -1;
         } else {
             player = 1;
-        }
+        }       
     }
 
     return 0;
 }
 
 void NBTicTacToe::indicateCurrent(int& x, int& y) {
-    cout << endl << "event: playing board(" << x + 1 << ","
+    cout << "event: playing board(" << x + 1 << ","
     << y + 1 << ")" << endl;
 }
 

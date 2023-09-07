@@ -13,6 +13,8 @@ using namespace std;
 #include "TicTacToe.h"
 #include "Game.h"
 
+using namespace std;
+
 int main() {
 	Game game; //What does this statement mean?
 	

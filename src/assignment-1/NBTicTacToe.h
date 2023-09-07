@@ -40,7 +40,6 @@ int NBTicTacToe::play() {
         char playerSymbol = (player == 1) ? 'X' : 'O';
 
         int x, y;
-        indicateCurrent(currentBoard.x, currentBoard.y);
         
         if (player != -1) {
             int x = rand() % 3;
@@ -52,7 +51,7 @@ int NBTicTacToe::play() {
             
             cout << endl << "event: player X set focus board to board(" << currentBoard.x + 1
             << "," << currentBoard.y + 1 << ")" << endl;
-            
+            indicateCurrent(currentBoard.x, currentBoard.y);
             random.getXMove(boards[currentBoard.x][currentBoard.y], x, y, playerSymbol);
         } else {
             human.getOMove(boards[currentBoard.x][currentBoard.y], x, y, playerSymbol);

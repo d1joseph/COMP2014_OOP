@@ -9,7 +9,6 @@ is lost or damaged.
 #ifndef NBTICTACTOE_H_
 #define NBTICTACTOE_H_
 
-// Coordinate is a struct to keep track of the current board played in turn
 struct Coordinate {
     int x;
     int y;
@@ -17,13 +16,12 @@ struct Coordinate {
 
 class NBTicTacToe {
 private:
-    TicTacToe boards[3][3]; // init a 2d array of TicTacToe instances
+    TicTacToe boards[3][3];
     Coordinate currentBoard;
 public:
-        void displayBoards(); // displays 3x3 board of TicTacToe games
-    void indicateCurrent(int&, int&); // indicates the board being played in turn
-    void printMovePlayed(int&, int&, char); // prints the move played by the player in turn
-    int play();
+        void displayBoards();
+    void indicateCurrent(int&, int&);
+    void printMovePlayed(int&, int&, char);
 };
 
 int NBTicTacToe::play() {
@@ -56,7 +54,6 @@ int NBTicTacToe::play() {
 
         indicateCurrent(currentBoard.x, currentBoard.y);
 
-        // add move and increment for focus board
         boards[currentBoard.x][currentBoard.y].addMove(x, y, player);
         
         printMovePlayed(x, y, playerSymbol);
@@ -101,12 +98,11 @@ void NBTicTacToe::printMovePlayed(int& x, int& y, char player) {
 }
 
 void NBTicTacToe::displayBoards() {
-    for (int row = 0; row < 3; row++) { // loop for each row in the board
-        for (int i = 0; i < 3; i++) { // row index
-            for (int col = 0; col < 3; col++) { // loop for each cell in a column
-                for (int j = 0; j < 3; j++) { // column index                  
+    for (int row = 0; row < 3; row++) {
+        for (int i = 0; i < 3; i++) {
+            for (int col = 0; col < 3; col++) {
+                for (int j = 0; j < 3; j++) {                 
                     
-                    // get cell values for each board instance
                     vector<int> positions = boards[row][col].getCellValues();
 
                     char playerSymbol = ' ';
@@ -115,8 +111,7 @@ void NBTicTacToe::displayBoards() {
                     } else if (positions[i * 3 + j] == -1) {
                         playerSymbol = 'O';
                     }
-                    
-                    // cell borders
+
                     if (j == 0) {
                         cout << " ";   
                     }
@@ -129,13 +124,12 @@ void NBTicTacToe::displayBoards() {
                 }
 
                 if (col < 3 - 1) {
-                    cout << "  "; // padding between boards
+                    cout << "  ";
                 }    
             }
             cout << endl;
         }
 
-        // row dividers
         if (row < 3 - 1) {
             for (int i = 0; i < 28; i++) {
                 cout << "-";

@@ -19,7 +19,8 @@ private:
     TicTacToe boards[3][3];
     Coordinate currentBoard;
 public:
-    void displayBoards();
+    void displayBoards(); // displays 3x3 board of TicTacToe games
+    void indicateCurrent(int&, int&); // indicates the board being played in turn
     int play();
 };
 
@@ -32,7 +33,8 @@ int NBTicTacToe::play() {
         
     int done = 0;
     while (done == 0) {
-        srand(time(0));
+        srand(time(0)); 
+
 
         char playerSymbol = (player == 1) ? 'X' : 'O';
         cout << "Player " << playerSymbol << " enter move[row][col]: ";
@@ -53,8 +55,7 @@ int NBTicTacToe::play() {
             human.getOMove(boards[currentBoard.x][currentBoard.y], x, y);
         }
 
-        cout << endl << "playing board[" << currentBoard.x + 1 << "]"
-        << "[" << currentBoard.y + 1 << "]" << endl;
+        indicateCurrent(currentBoard.x, currentBoard.y);
 
         // add move and increment for focus board
         boards[currentBoard.x][currentBoard.y].addMove(x, y, player);
@@ -85,6 +86,11 @@ int NBTicTacToe::play() {
     }
 
     return 0;
+}
+
+void NBTicTacToe::indicateCurrent(int& x, int& y) {
+    cout << endl << "playing board[" << x + 1 << "]"
+    << "[" << y + 1 << "]" << endl;
 }
 
 void NBTicTacToe::displayBoards() {

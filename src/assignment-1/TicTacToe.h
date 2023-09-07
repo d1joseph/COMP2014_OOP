@@ -68,7 +68,7 @@ bool TicTacToe::isValidMove(int x, int y) {
 	}
 }
 
-bool TicTacToe::getOMove(int &x, int &y) {
+bool TicTacToe::getOMove(int& x, int& y) {
 	if (noOfMoves >= 9)
 		return false;
 
@@ -83,7 +83,7 @@ bool TicTacToe::getOMove(int &x, int &y) {
 	return true;
 }
 
-bool TicTacToe::getXMove(int &x, int &y) {
+bool TicTacToe::getXMove(int& x, int& y) {
 	if (noOfMoves >= 9) {
 		return false;
 	}

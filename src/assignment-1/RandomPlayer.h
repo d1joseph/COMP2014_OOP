@@ -21,15 +21,10 @@ void RandomPlayer::getXMove(TicTacToe board, int& x, int& y) {
         return;
 	}
 
-	srand(time(0));
-
-	int row, col;
 	do {
-		row = rand() % 3;
-		col = rand() % 3;
-	} while (!board.isValidMove(row, col));
-	x = row;
-	y = col;
+		x = rand() % 3;
+		y = rand() % 3;
+	} while (!board.isValidMove(x, y));
 };
 
 #endif // RANDOMPLAYER_H_

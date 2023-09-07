@@ -16,16 +16,16 @@ public:
 
 // board passed as TicTacToe board[currentBoard.x][currentBoard.y]
 void HumanPlayer::getOMove(TicTacToe board, int& x, int& y) {
-    if (board.getMoveCount() >= 9)
+    if (board.getMoveCount() >= 9) {
 		return;
+	}
 
-	int row, col;
 	do {
-		cin >> row >> col;
+		cin >> x >> y;
 		cout << endl;
-	} while (!board.isValidMove(row - 1, col - 1));
-	x = row - 1;
-	y = col - 1;
+	} while (!board.isValidMove(x - 1, y - 1));
+	x = x - 1;
+	y = y - 1;
 };
 
 #endif // HUMANPLAYER_H_

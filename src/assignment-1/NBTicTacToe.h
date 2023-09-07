@@ -29,9 +29,7 @@ int NBTicTacToe::play() {
     int player = 1; // x goes first
     HumanPlayer human;
     RandomPlayer random;
-    
-    displayBoards();
-    
+        
     int done = 0;
     while (done == 0) {
         srand(time(0));
@@ -46,6 +44,7 @@ int NBTicTacToe::play() {
             // choose a board to play using currentBoard struct;
             currentBoard.x = x;
             currentBoard.y = y;
+            
             cout << endl << "Player X set focus board to board[" << currentBoard.x + 1
             << "]" << "[" << currentBoard.y + 1 << "]" << endl;
             
@@ -65,16 +64,16 @@ int NBTicTacToe::play() {
 
         done = boards[currentBoard.x][currentBoard.y].gameStatus();
         if (done == 1) {
-            cout << "Player X wins board[" << currentBoard.x << "]" << "["
-            << currentBoard.y << "]" << endl;
+            cout << "Player X wins board[" << currentBoard.x + 1 << "]" << "["
+            << currentBoard.y + 1 << "]" << endl;
             return 1;
         } else if (done == -1) {
-            cout << "Player O wins board[" << currentBoard.x << "]" << "["
-            << currentBoard.y << "]" << endl;
+            cout << "Player O wins board[" << currentBoard.x + 1 << "]" << "["
+            << currentBoard.y + 1 << "]" << endl;
             return -1;
         } else if (done == 2) {
-            cout << "Draw game at board[" << currentBoard.x << "]" << "["
-            << currentBoard.y << "]" << endl;
+            cout << "Draw game at board[" << currentBoard.x + 1 << "]" << "["
+            << currentBoard.y + 1 << "]" << endl;
             return 0;
         }
 
@@ -83,17 +82,16 @@ int NBTicTacToe::play() {
         } else {
             player = 1;
         }
-
     }
 
     return 0;
 }
 
 void NBTicTacToe::displayBoards() {
-    for (int row = 0; row < 3; row++) {
-        for (int i = 0; i < 3; i++) { // loop for each row in the board
-            for (int col = 0; col < 3; col++) {
-                for (int j = 0; j < 3; j++) { // loop for each cell in a row                    
+    for (int row = 0; row < 3; row++) { // loop for each row in the board
+        for (int i = 0; i < 3; i++) { // row index
+            for (int col = 0; col < 3; col++) { // loop for each cell in a column
+                for (int j = 0; j < 3; j++) { // column index                  
                     
                     // get cell values for each board instance
                     vector<int> positions = boards[row][col].getCellValues();

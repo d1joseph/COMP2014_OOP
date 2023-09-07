@@ -13,9 +13,10 @@ is lost or damaged.
 class RandomPlayer {
 public:
     void getXMove(TicTacToe board, int&, int&);
-}
+};
 
-void RandomPlayer::getXMove(TicTacToe, int&, int&) {
+// board passed as TicTacToe board[currentBoard.x][currentBoard.y]
+void RandomPlayer::getXMove(TicTacToe board, int& x, int& y) {
     if (board.getMoveCount() >= 9) {
         return;
 	}
@@ -24,11 +25,11 @@ void RandomPlayer::getXMove(TicTacToe, int&, int&) {
 
 	int row, col;
 	do {
-		row = rand() % BOARDSIZE + 1;
-		col = rand() % BOARDSIZE + 1;
-	} while (!board.isValidMove(row-1, col-1));
-	x = row - 1;
-	y = col - 1;
-}
+		row = rand() % 3;
+		col = rand() % 3;
+	} while (!board.isValidMove(row, col));
+	x = row;
+	y = col;
+};
 
 #endif // RANDOMPLAYER_H_

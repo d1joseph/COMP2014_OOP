@@ -9,11 +9,9 @@ is lost or damaged.
 #ifndef TICTACTOE_H_
 #define TICTACTOE_H_
 
-const int BOARDSIZE = 3;
-
 class TicTacToe {
 private:
-	int board[BOARDSIZE][BOARDSIZE];
+	int board[3][3];
 	int noOfMoves;
 	const int WIN = 3;
 public:
@@ -60,20 +58,14 @@ void TicTacToe::displayBoard() {
 }
 
 bool TicTacToe::isValidMove(int x, int y) {
-	if (x >= 0 && x < BOARDSIZE && y >= 0 && y < BOARDSIZE) {
-		// check if the cell is occupied
-		if (board[x][y] == 1 || board[x][y] == -1) {
-				cout << "error: cell is occupied" << endl;
-				cout << "enter valid move:";
-				return false;
-			}
-	} else {
-		cout << "error: cell is not within range" << endl;
-		cout << "enter valid move:";
+	if (0 <= x && x <= 2 && 0 <= y && y <= 2 && board[x][y] == 0) {
+		return true;
+	}
+	else {
+		cout << "warning: invalid move" << endl;
+		cout << "enter a valid move:";
 		return false;
 	}
-
-	return true;
 }
 
 bool TicTacToe::getOMove(int &x, int &y) {
@@ -100,8 +92,8 @@ bool TicTacToe::getXMove(int &x, int &y) {
 
 	int row, col;
 	do {
-		row = rand() % BOARDSIZE + 1;
-		col = rand() % BOARDSIZE + 1;
+		row = rand() % 3 + 1;
+		col = rand() % 3 + 1;
 	} while (!isValidMove(row-1, col-1));
 	x = row - 1;
 	y = col - 1;
@@ -112,8 +104,8 @@ bool TicTacToe::getXMove(int &x, int &y) {
 vector<int> TicTacToe::getCellValues() {
     vector<int> positions;
 
-    for (int row = 0; row < BOARDSIZE; row++) {
-        for (int col = 0; col < BOARDSIZE; col++) {
+    for (int row = 0; row < 3; row++) {
+        for (int col = 0; col < 3; col++) {
             positions.push_back(board[row][col]);
         }
     }
@@ -129,7 +121,7 @@ void TicTacToe::incrementMoveCount() {
 	noOfMoves++;
 }
 
-void TicTacToe::addMove(int x, int y, int player) {//What is this function for?
+void TicTacToe::addMove(int x, int y, int player) {
 	board[x][y] = player;
 }
 
@@ -138,10 +130,10 @@ int TicTacToe::gameStatus() {
         int winSymbol = player;
 
         // Check rows for a win
-        for (int row = 0; row < BOARDSIZE; row++) {
+        for (int row = 0; row < 3; row++) {
             int symbolCount = 0;
 
-            for (int col = 0; col < BOARDSIZE; col++) {
+            for (int col = 0; col < 3; col++) {
                 if (board[row][col] == winSymbol) {
                     ++symbolCount;
 
@@ -155,10 +147,10 @@ int TicTacToe::gameStatus() {
         }
 
         // Check columns for a win
-        for (int col = 0; col < BOARDSIZE; col++) {
+        for (int col = 0; col < 3; col++) {
             int symbolCount = 0;
 
-            for (int row = 0; row < BOARDSIZE; row++) {
+            for (int row = 0; row < 3; row++) {
                 if (board[row][col] == winSymbol) {
                     ++symbolCount;
 
@@ -174,8 +166,8 @@ int TicTacToe::gameStatus() {
         // Check diagonals for a win
 
         // Check top-left to bottom-right
-        for (int row = 0; row <= BOARDSIZE - WIN; ++row) {
-            for (int col = 0; col <= BOARDSIZE - WIN; ++col) {
+        for (int row = 0; row <= 3 - WIN; ++row) {
+            for (int col = 0; col <= 3 - WIN; ++col) {
                 int symbolCount = 0;
 
                 for (int i = 0; i < WIN; ++i) {
@@ -193,8 +185,8 @@ int TicTacToe::gameStatus() {
         }
 
         // Check top-right to bottom-left
-        for (int row = 0; row <= BOARDSIZE - WIN; ++row) {
-            for (int col = WIN - 1; col < BOARDSIZE; ++col) {
+        for (int row = 0; row <= 3 - WIN; ++row) {
+            for (int col = WIN - 1; col < 3; ++col) {
                 int symbolCount = 0;
 
                 for (int i = 0; i < WIN; ++i) {

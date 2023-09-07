@@ -9,12 +9,13 @@ is lost or damaged.
 #ifndef HUMANPLAYER_H_
 #define HUMANPLAYER_H_
 
-class Human {
+class HumanPlayer {
 public:
     void getOMove(TicTacToe board, int&, int&);
-}
+};
 
-void Human::getOMove(TicTacToe board, int& x, int& y) {
+// board passed as TicTacToe board[currentBoard.x][currentBoard.y]
+void HumanPlayer::getOMove(TicTacToe board, int& x, int& y) {
     if (board.getMoveCount() >= 9)
 		return;
 
@@ -25,6 +26,6 @@ void Human::getOMove(TicTacToe board, int& x, int& y) {
 	} while (!board.isValidMove(row - 1, col - 1));
 	x = row - 1;
 	y = col - 1;
-}
+};
 
 #endif // HUMANPLAYER_H_

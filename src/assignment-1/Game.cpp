@@ -14,13 +14,15 @@ is lost or damaged.
 using namespace std;
 
 #include "TicTacToe.h"
+#include "RandomPlayer.h"
+#include "HumanPlayer.h"
 #include "NBTicTacToe.h"
 
 using namespace std;
 
 int main() {
-    // NBTicTacToe game;
-    TicTacToe game;
+    NBTicTacToe game;
+    
     game.play();
 
     return 0;

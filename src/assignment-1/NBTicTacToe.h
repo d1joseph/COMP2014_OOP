@@ -19,11 +19,17 @@ private:
     TicTacToe boards[3][3];
     Coordinate currentBoard;
 public:
+    NBTicTacToe();
     int play();
     void displayBoards();
     void indicateCurrent(int&, int&);
     void printMovePlayed(int&, int&, char);
 };
+
+NBTicTacToe::NBTicTacToe() {
+    currentBoard.x = 0;
+    currentBoard.y = 0;
+}
 
 int NBTicTacToe::play() {
     cout << "### 9 Board Tic Tac Toe ###" << endl;    

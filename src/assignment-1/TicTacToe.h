@@ -63,7 +63,7 @@ bool TicTacToe::isValidMove(int x, int y) {
 	}
 	else {
 		cout << "warning: invalid move" << endl;
-		cout << "enter a valid move:";
+		cout << "input: enter a valid move:";
 		return false;
 	}
 }

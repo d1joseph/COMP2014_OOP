@@ -24,11 +24,16 @@ public:
     void displayBoards();
     void indicateCurrent(int&, int&);
     void printMovePlayed(int&, int&, char);
+    void setFocus();
 };
 
 NBTicTacToe::NBTicTacToe() {
-    currentBoard.x = 0;
-    currentBoard.y = 0;
+    // choose a random board to start the game on init
+    int x = rand() % 3;
+    int y = rand() % 3;
+
+    currentBoard.x = x;
+    currentBoard.y = y;
 }
 
 int NBTicTacToe::play() {
@@ -44,21 +49,21 @@ int NBTicTacToe::play() {
         srand(time(0));
         char playerSymbol = (player == 1) ? 'X' : 'O';
         int x, y;
-    
-        if (player != -1) {
-            int cX = rand() % 3;
-            int cY = rand() % 3;
-            currentBoard.x = cX;
-            currentBoard.y = cY;
+        
+        cout << endl << "event: player " << playerSymbol  << " sets focus to board(" << currentBoard.x + 1
+        << "," << currentBoard.y + 1 << ")" << endl;
+        
+        cout << "event: player " << playerSymbol << " turn" << endl;
+        if (player != 1) {
+            // random.getXMove(boards[currentBoard.x][currentBoard.y], x, y, playerSymbol);
+            indicateCurrent(currentBoard.x, currentBoard.y);
+            human.getOMove(boards[currentBoard.x][currentBoard.y], x, y, playerSymbol);
 
-            random.getXMove(boards[currentBoard.x][currentBoard.y], x, y, playerSymbol);
         } else {
             indicateCurrent(currentBoard.x, currentBoard.y);
             human.getOMove(boards[currentBoard.x][currentBoard.y], x, y, playerSymbol);
         }
-        
-        cout << endl << "event: player X set focus board to board(" << currentBoard.x + 1
-        << "," << currentBoard.y + 1 << ")" << endl;
+
 
         indicateCurrent(currentBoard.x, currentBoard.y);
 
@@ -85,6 +90,9 @@ int NBTicTacToe::play() {
             return 0;
         }
 
+        currentBoard.x = x;
+        currentBoard.y = y;
+        
         if (player == 1) {
             player = -1;
         } else {

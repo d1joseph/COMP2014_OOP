@@ -1,18 +1,31 @@
 #ifndef GAME_H_
 #define GAME_H_
 
+struct Coordinate {
+    int x;
+    int y;
+};
+
 class Game {
 public:
-    void play();
+    Game();
     void getXMove(int&, int&);
     void getOMove(int&, int&);
+    void displayBoards();
+    void play();
 private:
-    TicTacToe board;
+    TicTacToe boards[3][3];
+    Coordinate currentBoard;
 };
+
+Game::Game() {
+    currentBoard.x = 0;
+    currentBoard.y = 0;
+}
 
 void Game::getXMove(int& x, int& y) {
     cout << "calling Game::getXMove()" << endl;
-    if (board.getMoveCount() >= 9) {
+    if (boards[0][0].getMoveCount() >= 9) {
 		return;
 	}
 
@@ -23,14 +36,14 @@ void Game::getXMove(int& x, int& y) {
 	do {
 		row = rand() % 3 + 1;
 		col = rand() % 3 + 1;
-	} while (!board.isValidMove(row-1, col-1));
+	} while (!boards[0][0].isValidMove(row-1, col-1));
 	x = row - 1;
 	y = col - 1;
 }
 
 void Game::getOMove(int& x, int& y) {
     cout << "calling Game::getOMove()" << endl;
-    if (board.getMoveCount() >= 9) {
+    if (boards[0][0].getMoveCount() >= 9) {
 		return;
     }
 
@@ -38,7 +51,7 @@ void Game::getOMove(int& x, int& y) {
 	do {
 		cin >> row >> col;
 		cout << endl;
-	} while (!board.isValidMove(row - 1, col - 1));
+	} while (!boards[0][0].isValidMove(row - 1, col - 1));
 	x = row - 1;
 	y = col - 1;
 }
@@ -47,7 +60,7 @@ void Game::play() {
     int player = 1;
     cout << "playing TicTacToe" << endl;
     
-    board.displayBoard();
+    displayBoards();
     
     int done = 0;
     while (done == 0) {
@@ -60,11 +73,11 @@ void Game::play() {
         } else {
             getOMove(x, y);
         }
-        board.addMove(x, y, player);
-        board.incrementMoves();
-        board.displayBoard();
+        boards[0][0].addMove(x, y, player);
+        boards[0][0].incrementMoves();
+        displayBoards();
 
-        done = board.gameStatus();
+        done = boards[0][0].gameStatus();
         if (done == 1) {
             cout << "Player X wins!" << endl;
         } else if (done = -1) {
@@ -79,6 +92,48 @@ void Game::play() {
             player = 1;
         }
 
+    }
+}
+
+void Game::displayBoards() {
+    for (int row = 0; row < 3; row++) {
+        for (int i = 0; i < 3; i++) {
+            for (int col = 0; col < 3; col++) {
+                for (int j = 0; j < 3; j++) {                 
+                    
+                    vector<int> positions = boards[row][col].getCells();
+
+                    char playerSymbol = ' ';
+                    if (positions[i * 3 + j] == 1) {
+                        playerSymbol = 'X';
+                    } else if (positions[i * 3 + j] == -1) {
+                        playerSymbol = 'O';
+                    }
+
+                    if (j == 0) {
+                        cout << " ";   
+                    }
+                    
+                    cout << "|" << playerSymbol;
+                    
+                    if (j == 2) {
+                        cout << "|";
+                    }
+                }
+
+                if (col < 3 - 1) {
+                    cout << "  ";
+                }    
+            }
+            cout << endl;
+        }
+
+        if (row < 3 - 1) {
+            for (int i = 0; i < 28; i++) {
+                cout << "-";
+            }
+            cout << endl;
+        }
     }
 }
 

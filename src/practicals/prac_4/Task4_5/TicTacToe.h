@@ -8,11 +8,6 @@
 #ifndef TICTACTOE_H_
 #define TICTACTOE_H_
 
-#include <iostream>
-#include <iomanip>
-
-using namespace std;
-
 const int BOARDSIZE = 3;
 
 class TicTacToe {
@@ -27,6 +22,7 @@ public:
 	bool getXMove(int&, int&);
 	bool getOMove(int&, int&);
 	void addMove(int, int, int);
+	vector<int> getCells();
 	void incrementMoves();
 	int getMoveCount();
 	int gameStatus();
@@ -136,6 +132,18 @@ void TicTacToe::addMove(int x, int y, int player) {//What is this function for?
 		returns true
 	*/
 	board[x][y] = player;
+}
+
+vector<int> TicTacToe::getCells() {
+	vector<int> positions;
+
+    for (int row = 0; row < 3; row++) {
+        for (int col = 0; col < 3; col++) {
+            positions.push_back(board[row][col]);
+        }
+    }
+
+    return positions;
 }
 
 int TicTacToe::gameStatus() {//Add your code to complete the program
@@ -274,7 +282,5 @@ int TicTacToe::play() {//What is the counterpart of this function in the origina
 	}
 
 	return 0;
-
-
 
 #endif /* TICTACTOE_H_ */

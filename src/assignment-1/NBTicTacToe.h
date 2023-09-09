@@ -14,7 +14,8 @@ public:
     NBTicTacToe(HumanPlayer, RandomPlayer);
     void displayBoards();
     void displayData();
-    void indicateCurrent(int&, int&);
+    void getCurrentBoard(int&, int&);
+    void getRules();
     int play(HumanPlayer, RandomPlayer);
     void printMovePlayed(int&, int&, char);
     void setFocus(int&, int&, int&);
@@ -22,18 +23,20 @@ public:
 };
 
 NBTicTacToe::NBTicTacToe(HumanPlayer, RandomPlayer) {
+    cout << "##OXO Nine Board to Board TicTacToe XOX##" << endl;
+    
     int x = rand() % 3;
     int y = rand() % 3;
     currentBoard.x = x;
     currentBoard.y = y;
 
-    cout << "### Welcome to Board Tic Tac Toe ###" << endl;
 
     HumanPlayer human;
     RandomPlayer random;
 }
 
 int NBTicTacToe::play(HumanPlayer human, RandomPlayer random) {
+    // getRules();
     int player = 1;
 
     displayBoards();
@@ -45,7 +48,7 @@ int NBTicTacToe::play(HumanPlayer human, RandomPlayer random) {
         cout << endl << "event: player " << playerSymbol  << " sets focus to board(" << currentBoard.x + 1
         << "," << currentBoard.y + 1 << ")" << endl;
         
-        indicateCurrent(currentBoard.x, currentBoard.y);
+        getCurrentBoard(currentBoard.x, currentBoard.y);
         cout << "event: player " << playerSymbol << " turn" << endl;
         
         if (player == 1) {
@@ -91,9 +94,13 @@ int NBTicTacToe::play(HumanPlayer human, RandomPlayer random) {
     return 0;
 }
 
-void NBTicTacToe::indicateCurrent(int& x, int& y) {
+void NBTicTacToe::getCurrentBoard(int& x, int& y) {
     cout << "event: playing board(" << x + 1 << ","
     << y + 1 << ")" << endl;
+}
+
+void NBTicTacToe::getRules() {
+    
 }
 
 void NBTicTacToe::printMovePlayed(int& x, int& y, char player) {

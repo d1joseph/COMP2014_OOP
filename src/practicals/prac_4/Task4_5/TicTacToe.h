@@ -18,7 +18,6 @@ private:
 public:
 	TicTacToe();
 	bool isValidMove(int, int);
-	bool getXOMove(int&, int&);
 	bool getXMove(int&, int&);
 	bool getOMove(int&, int&);
 	void addMove(int, int, int);
@@ -282,5 +281,5 @@ int TicTacToe::play() {//What is the counterpart of this function in the origina
 	}
 
 	return 0;
-
+}
 #endif /* TICTACTOE_H_ */

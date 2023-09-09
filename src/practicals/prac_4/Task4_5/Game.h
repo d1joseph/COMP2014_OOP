@@ -8,7 +8,6 @@ struct Coordinate {
 
 class Game {
 public:
-    Game();
     void getXMove(int&, int&);
     void getOMove(int&, int&);
     void displayBoards();
@@ -18,20 +17,11 @@ private:
     Coordinate currentBoard;
 };
 
-Game::Game() {
-    currentBoard.x = 0;
-    currentBoard.y = 0;
-}
-
 void Game::getXMove(int& x, int& y) {
-    cout << "calling Game::getXMove()" << endl;
     if (boards[0][0].getMoveCount() >= 9) {
 		return;
 	}
-
-	// rng seed
-	std::srand(time(0));
-
+    
 	int row, col;
 	do {
 		row = rand() % 3 + 1;
@@ -42,7 +32,6 @@ void Game::getXMove(int& x, int& y) {
 }
 
 void Game::getOMove(int& x, int& y) {
-    cout << "calling Game::getOMove()" << endl;
     if (boards[0][0].getMoveCount() >= 9) {
 		return;
     }
@@ -58,6 +47,7 @@ void Game::getOMove(int& x, int& y) {
 
 void Game::play() {
     int player = 1;
+    srand(time(0));
     cout << "playing TicTacToe" << endl;
     
     displayBoards();
@@ -69,15 +59,22 @@ void Game::play() {
         
         int x, y;
         if (player != -1) {
-            getXMove(x, y);
+            int cX = rand() % 3;
+            int cY = rand() % 3;
+            currentBoard.x = cX;
+            currentBoard.y = cY;
+
+            boards[currentBoard.x][currentBoard.y].getXMove(x, y);
         } else {
-            getOMove(x, y);
+            boards[currentBoard.x][currentBoard.y].getOMove(x, y);
         }
-        boards[0][0].addMove(x, y, player);
-        boards[0][0].incrementMoves();
+        boards[currentBoard.x][currentBoard.y].addMove(x, y, player);
+        boards[currentBoard.x][currentBoard.y].incrementMoves();
+        
         displayBoards();
 
-        done = boards[0][0].gameStatus();
+        done = boards[currentBoard.x][currentBoard.y].gameStatus();
+
         if (done == 1) {
             cout << "Player X wins!" << endl;
         } else if (done = -1) {
@@ -91,7 +88,6 @@ void Game::play() {
         } else {
             player = 1;
         }
-
     }
 }
 

@@ -53,19 +53,16 @@ int NBTicTacToe::play() {
         cout << endl << "event: player " << playerSymbol  << " sets focus to board(" << currentBoard.x + 1
         << "," << currentBoard.y + 1 << ")" << endl;
         
+        indicateCurrent(currentBoard.x, currentBoard.y);
         cout << "event: player " << playerSymbol << " turn" << endl;
-        if (player != 1) {
-            // random.getXMove(boards[currentBoard.x][currentBoard.y], x, y, playerSymbol);
-            indicateCurrent(currentBoard.x, currentBoard.y);
-            human.getOMove(boards[currentBoard.x][currentBoard.y], x, y, playerSymbol);
+        
+        if (player == 1) {
+            random.getXMove(boards[currentBoard.x][currentBoard.y], x, y, playerSymbol);
+            // human.getOMove(boards[currentBoard.x][currentBoard.y], x, y, playerSymbol);
 
         } else {
-            indicateCurrent(currentBoard.x, currentBoard.y);
             human.getOMove(boards[currentBoard.x][currentBoard.y], x, y, playerSymbol);
         }
-
-
-        indicateCurrent(currentBoard.x, currentBoard.y);
 
         boards[currentBoard.x][currentBoard.y].addMove(x, y, player);
         

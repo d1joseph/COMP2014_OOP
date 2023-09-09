@@ -20,10 +20,9 @@ int main() {
 	Game game; //What does this statement mean?
 	
 	// A: instantiate a game object of the TicTacToe class
-	game.displayBoards();
+	game.play();
 
 	return 0;
-
 }
 
 

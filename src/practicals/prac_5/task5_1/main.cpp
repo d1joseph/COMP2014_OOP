@@ -18,4 +18,5 @@ int main() {
     graph->inputData();
     graph->display();
 
+    return 0;
 }

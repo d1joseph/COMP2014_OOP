@@ -12,14 +12,13 @@ private:
     Coordinate currentBoard;
 public:
     NBTicTacToe(HumanPlayer, RandomPlayer);
-    bool start();
-    int play(HumanPlayer, RandomPlayer);
     void displayBoards();
+    void displayData();
     void indicateCurrent(int&, int&);
+    int play(HumanPlayer, RandomPlayer);
     void printMovePlayed(int&, int&, char);
     void setFocus();
-
-    void displayData();
+    bool start();
 };
 
 NBTicTacToe::NBTicTacToe(HumanPlayer, RandomPlayer) {

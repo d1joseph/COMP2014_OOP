@@ -17,7 +17,7 @@ public:
     void indicateCurrent(int&, int&);
     int play(HumanPlayer, RandomPlayer);
     void printMovePlayed(int&, int&, char);
-    void setFocus();
+    void setFocus(int&, int&, int&);
     bool start();
 };
 
@@ -35,8 +35,6 @@ NBTicTacToe::NBTicTacToe(HumanPlayer, RandomPlayer) {
 
 int NBTicTacToe::play(HumanPlayer human, RandomPlayer random) {
     int player = 1;
-    // HumanPlayer human;
-    // RandomPlayer random;
 
     displayBoards();
     int done = 0;
@@ -81,8 +79,7 @@ int NBTicTacToe::play(HumanPlayer human, RandomPlayer random) {
             return 0;
         }
 
-        currentBoard.x = x;
-        currentBoard.y = y;
+        setFocus(x, y, player);
         
         if (player == 1) {
             player = -1;
@@ -100,7 +97,7 @@ void NBTicTacToe::indicateCurrent(int& x, int& y) {
 }
 
 void NBTicTacToe::printMovePlayed(int& x, int& y, char player) {
-	cout << "event: player " << player << " plays move: (" << x + 1 << ","
+	cout << "event: " << player << " plays move: (" << x + 1 << ","
 	<< y + 1 << ")" << endl;
 }
 
@@ -145,4 +142,15 @@ void NBTicTacToe::displayBoards() {
         }
     }
 }
+
+void NBTicTacToe::setFocus(int& x, int& y, int& player) {
+    currentBoard.x = x;
+    currentBoard.y = y;
+
+    char playerSymbol = (player == 1) ? 'X' : 'O';
+    
+    cout << endl << "event: player " << playerSymbol  << " sets focus to board(" << currentBoard.x + 1
+    << "," << currentBoard.y + 1 << ")" << endl;
+}
+
 #endif // NBTICTACTOE_H_

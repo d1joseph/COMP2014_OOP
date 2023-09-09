@@ -18,7 +18,7 @@ public:
     void getRules();
     int play(HumanPlayer, RandomPlayer);
     void printMovePlayed(int&, int&, char);
-    void setFocus(int&, int&, int&);
+    void setCurrentBoard(int&, int&, int&);
     bool start();
 };
 
@@ -82,7 +82,7 @@ int NBTicTacToe::play(HumanPlayer human, RandomPlayer random) {
             return 0;
         }
 
-        setFocus(x, y, player);
+        setCurrentBoard(x, y, player);
         
         if (player == 1) {
             player = -1;
@@ -150,7 +150,7 @@ void NBTicTacToe::displayBoards() {
     }
 }
 
-void NBTicTacToe::setFocus(int& x, int& y, int& player) {
+void NBTicTacToe::setCurrentBoard(int& x, int& y, int& player) {
     currentBoard.x = x;
     currentBoard.y = y;
 

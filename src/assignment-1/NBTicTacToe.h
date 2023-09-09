@@ -1,11 +1,3 @@
-/*********** Declaration*******
-I hereby certify that no part of this assignment has been copied from
-any other student’s work or from any other source. No part of the
-code has been written/produced for me by another person or copied
-from any other source.
-I hold a copy of this assignment that I can produce if the original
-is lost or damaged.
-**************************/
 #ifndef NBTICTACTOE_H_
 #define NBTICTACTOE_H_
 
@@ -19,34 +11,37 @@ private:
     TicTacToe boards[3][3];
     Coordinate currentBoard;
 public:
-    NBTicTacToe();
-    int play();
+    NBTicTacToe(HumanPlayer, RandomPlayer);
+    bool start();
+    int play(HumanPlayer, RandomPlayer);
     void displayBoards();
     void indicateCurrent(int&, int&);
     void printMovePlayed(int&, int&, char);
     void setFocus();
+
+    void displayData();
 };
 
-NBTicTacToe::NBTicTacToe() {
-    // choose a random board to start the game on init
+NBTicTacToe::NBTicTacToe(HumanPlayer, RandomPlayer) {
     int x = rand() % 3;
     int y = rand() % 3;
-
     currentBoard.x = x;
     currentBoard.y = y;
-}
 
-int NBTicTacToe::play() {
-    cout << "### 9 Board Tic Tac Toe ###" << endl;    
-    
-    int player = 1;
+    cout << "### Welcome to Board Tic Tac Toe ###" << endl;
+
     HumanPlayer human;
     RandomPlayer random;
+}
+
+int NBTicTacToe::play(HumanPlayer human, RandomPlayer random) {
+    int player = 1;
+    // HumanPlayer human;
+    // RandomPlayer random;
 
     displayBoards();
     int done = 0;
     while (done == 0) {
-        srand(time(0));
         char playerSymbol = (player == 1) ? 'X' : 'O';
         int x, y;
         

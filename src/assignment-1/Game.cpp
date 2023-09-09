@@ -5,8 +5,10 @@ code has been written/produced for me by another person or copied
 from any other source.
 I hold a copy of this assignment that I can produce if the original
 is lost or damaged.
-**************************/
 
+Author: Dhivyan Joseph
+StudentId: 18225899
+**************************/
 #include<iostream>
 #include<iomanip>
 #include<vector>
@@ -22,9 +24,12 @@ using namespace std;
 
 int main() {
     srand(time(0));
-    NBTicTacToe game;
-    
-    game.play();
+
+    HumanPlayer o;
+    RandomPlayer x;
+
+    NBTicTacToe game(o,x);
+    game.play(o,x);
 
     return 0;
 }

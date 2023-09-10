@@ -27,6 +27,7 @@ public:
     int play(HumanPlayer, RandomPlayer);
     void getMovePlayed(int&, int&, char&);
     void setCurrentBoard(int&, int&, int&);
+    void gameStatus();
 };
 
 NBTicTacToe::NBTicTacToe(HumanPlayer, RandomPlayer) {
@@ -47,7 +48,8 @@ int NBTicTacToe::play(HumanPlayer human, RandomPlayer random) {
 
     displayBoards();
 
-    // last move played
+    // TODO: use this to get the move played and push
+    // to the Stats instance
     Move lastMovePlayed;
 
     int done = 0;

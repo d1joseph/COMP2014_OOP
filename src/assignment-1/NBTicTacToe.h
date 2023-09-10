@@ -130,11 +130,7 @@ void NBTicTacToe::displayBoards() {
     cout << endl << endl;
     // TODO: Add row/column numbers
 
-    for (int i = 0; i < 27; i*3) {
-        cout << " " i;
-    }
-    cout << endl;
-
+    cout << "    1        2         3  " << endl;
     for (int row = 0; row < 3; row++) {
         for (int i = 0; i < 3; i++) {
             for (int col = 0; col < 3; col++) {

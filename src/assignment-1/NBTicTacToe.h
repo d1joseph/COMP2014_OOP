@@ -60,7 +60,7 @@ int NBTicTacToe::play(HumanPlayer human, RandomPlayer random) {
 
         displayBoards();
         
-        displayGameInfo(player, x, y, lastMovePlayed.row, lastMovePlayed.col);
+        displayGameInfo(player, x, y, currentBoard.x, currentBoard.y);
         
         if (player == 1) {
             random.getXMove(boards[currentBoard.x][currentBoard.y], x, y, playerSymbol);

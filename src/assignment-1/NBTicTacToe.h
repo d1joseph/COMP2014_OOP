@@ -57,6 +57,10 @@ int NBTicTacToe::play(HumanPlayer human, RandomPlayer random) {
         playerSymbol = (player == 1) ? 'X' : 'O';
         int x, y;
 
+        displayBoards();
+        
+        displayGameInfo(player, x, y, lastMovePlayed.row, lastMovePlayed.col);
+        
         if (player == 1) {
             random.getXMove(boards[currentBoard.x][currentBoard.y], x, y, playerSymbol);
             // human.getOMove(boards[currentBoard.x][currentBoard.y], x, y, playerSymbol);
@@ -72,8 +76,6 @@ int NBTicTacToe::play(HumanPlayer human, RandomPlayer random) {
         
         boards[currentBoard.x][currentBoard.y].incrementMoveCount();
 
-        displayBoards();
-        
         done = boards[currentBoard.x][currentBoard.y].gameStatus();
         if (done == 1) {
             cout << "event: Player X wins board[" << currentBoard.x + 1 << "]" << "["
@@ -91,13 +93,13 @@ int NBTicTacToe::play(HumanPlayer human, RandomPlayer random) {
 
         setCurrentBoard(x, y, player);
 
-        displayGameInfo(player, x, y, lastMovePlayed.row, lastMovePlayed.col);
-        
         if (player == 1) {
             player = -1;
         } else {
             player = 1;
-        }       
+        }
+
+        system("cls");
     }
 
     return 0;

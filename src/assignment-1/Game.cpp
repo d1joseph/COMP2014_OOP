@@ -15,6 +15,7 @@ StudentId: 18225899
 
 using namespace std;
 
+#include "OneDArray.h"
 #include "TicTacToe.h"
 #include "RandomPlayer.h"
 #include "HumanPlayer.h"

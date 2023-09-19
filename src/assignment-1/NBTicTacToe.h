@@ -38,6 +38,7 @@ NBTicTacToe::NBTicTacToe(HumanPlayer, RandomPlayer) {
     currentBoard.x = x;
     currentBoard.y = y;
 
+    OneDArray movesPlayed(10);
     HumanPlayer human;
     RandomPlayer random;
 }
@@ -50,22 +51,17 @@ int NBTicTacToe::play(HumanPlayer human, RandomPlayer random) {
 
     // TODO: use this to get the move played and push
     // to the Stats instance
-    Move lastMovePlayed;
 
     int done = 0;
     while (done == 0) {
         playerSymbol = (player == 1) ? 'X' : 'O';
         int x, y;
+        // push the value of x and y to the 
 
         if (player == 1) {
             random.getXMove(boards[currentBoard.x][currentBoard.y], x, y, playerSymbol);
-            // human.getOMove(boards[currentBoard.x][currentBoard.y], x, y, playerSymbol);
-            lastMovePlayed.row = x;
-            lastMovePlayed.col = y;
         } else {
             human.getOMove(boards[currentBoard.x][currentBoard.y], x, y, playerSymbol);
-            lastMovePlayed.row = x;
-            lastMovePlayed.col = y;
         }
 
         boards[currentBoard.x][currentBoard.y].addMove(x, y, player);
@@ -91,7 +87,7 @@ int NBTicTacToe::play(HumanPlayer human, RandomPlayer random) {
 
         setCurrentBoard(x, y, player);
 
-        displayGameInfo(player, x, y, lastMovePlayed.row, lastMovePlayed.col);
+        displayGameInfo(player, x, y, x,y);
         
         if (player == 1) {
             player = -1;

@@ -3,6 +3,8 @@
 * Author: 18225899
 * Date: 22 August 2023
 **/
+#ifndef ONEDARRAY_H_
+#define ONEDARRAY_H_
 
 #include <iostream>
 
@@ -84,3 +86,5 @@ void OneDArray::printArray() {
     }
     std::cout << std::endl;
 }
+
+#endif // ONEDARRAY_H_

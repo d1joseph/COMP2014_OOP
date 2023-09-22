@@ -5,7 +5,6 @@ using namespace std;
 
 #include "student.h"
 
-
 int main() {
     cout << "Student Registration Program" << endl;
     string name;
@@ -15,8 +14,6 @@ int main() {
     cin >> name;
     cout << "Enter number of units to enrol:";
     cin >> numOfUnits;
-
-    cout<<name<<" "<<numOfUnits;
     
     Student *s = new Student(name, numOfUnits);
     // get student name

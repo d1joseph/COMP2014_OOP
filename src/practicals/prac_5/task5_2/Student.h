@@ -4,19 +4,20 @@
 class Student {
 private:
     string name;
-    int numOfUnits;
+    int numUnits;
     string* unitList; 
 public:
-    Student(string name, int numOfUnits);
+    Student(string studentName, int units);
     ~Student();
     void getName();
-    void getUnitList();
     void setUnits();
-    void getUnit(string&);
+    void getUnitList();
 };
 
-Student::Student(string name, int numOfUnits) {
-    unitList = new string[numOfUnits];
+Student::Student(string studentName, int units) {
+    name = studentName;
+    numUnits = units;
+    unitList = new string[numUnits];
 }
 
 Student::~Student() {
@@ -24,28 +25,29 @@ Student::~Student() {
 }
 
 void Student::getName() {
-    cout << name;
+    cout << "student name: " << name << endl;
 }
 
 void Student::getUnitList() {
-    for (int unit = 0; unit < numOfUnits; unit++) {
-        cout << unitList[unit];
-        cout << " ";
+    cout << "student name:" << name << endl;
+    cout << "enrolled units:" << endl;
+
+    for (int unit = 0; unit < numUnits; unit++) {
+        cout << unit+1 << ". " << unitList[unit] << endl;
     }
+    cout << "total units: " << numUnits << endl;
 }
 
 void Student::setUnits() {
-    for (int i = 0; i <= numOfUnits; i++)
-    {
-        cout << endl
-             << "Enter subject for unit "
-             << i << endl;
-        getUnit(unitList[i-1]);
+    delete [] unitList;
+
+    string unitName;
+    for (int i = 0; i < numUnits; i++) {
+        cout << "enter subject " << i + 1 << " name: ";
+        cin >> unitName;
+        unitList[i] = unitName;
     }
 }
 
-void Student::getUnit(string& unit) {
-    cin >> unit;
-}
 
 #endif // STUDENT_H_

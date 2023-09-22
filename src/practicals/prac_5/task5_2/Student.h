@@ -39,7 +39,7 @@ void Student::getUnitList() {
 }
 
 void Student::setUnits() {
-    delete [] unitList;
+    delete []unitList;
 
     string unitName;
     for (int i = 0; i < numUnits; i++) {

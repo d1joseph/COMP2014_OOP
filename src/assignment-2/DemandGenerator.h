@@ -1,0 +1,4 @@
+#ifndef DEMANDGENERATOR_H_
+#define DEMANDGENERATOR_H_
+
+#endif // DEMANDGENERATOR_H_

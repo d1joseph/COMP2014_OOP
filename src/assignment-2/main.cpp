@@ -15,7 +15,12 @@ using namespace std;
 
 int main() {
     cout << "### EV Charging Scheduler v0 ###" << endl;
+    
     string city = NAME_MAP[0];
+    
     ChargingStation *s = new ChargingStation(1, city, 802, 10);
     s->getAllAttributes();
+
+    Vehicle *v = new Vehicle();
+    v->getAllAttributes();
 }

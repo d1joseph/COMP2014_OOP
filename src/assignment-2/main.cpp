@@ -5,17 +5,17 @@
 #include <iostream>
 #include <string>
 #include <vector>
-
-using namespace std;
-
-#include "ChargingAllocation.h"
-#include "ChargingStation.h"
 #include "Constant.h"
+#include "ChargingAllocation.h"
 #include "DemandGenerator.h"
 #include "Vehicle.h"
+#include "ChargingStation.h"
 
 using namespace std;
 
 int main() {
     cout << "### EV Charging Scheduler v0 ###" << endl;
+    string city = NAME_MAP[0];
+    ChargingStation *s = new ChargingStation(1, city, 802, 10);
+    s->getAllAttributes();
 }

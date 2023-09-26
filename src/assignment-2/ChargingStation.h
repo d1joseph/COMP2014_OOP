@@ -1,5 +1,5 @@
-#ifndef CONSTANT_H_
-#define CONSTANT_H_
+#ifndef CHARGINGSTATION_H_
+#define CHARGINGSTATION_H_
 
 class ChargingStation {
 private:

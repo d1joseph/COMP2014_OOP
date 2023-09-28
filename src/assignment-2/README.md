@@ -17,7 +17,7 @@ Create an efficient EV charging system that balances demand and charger supply w
 * All EVs start at Sydney and exit to a city along the M31 route to Melbourne. So, the default origin of all EVs is Sydney, except when they pause for charging at a city along the route;
 * Each city has 1 charging station, allowing us to associate a city with a charging station;
 * An EV may need to recharge multiple times to reach its destination;
-* However if its remaining battery is sufficient, then no charge will be allocated;
+* However, if its remaining battery is sufficient, then no charge will be allocated;
 * Once an EV is charged, its battery level will be back to full capacity;
 * Each charging takes half and hour, irrespective of amount to charge to full capacity;
 * Individual EV does not have the autonomy to select their charging stations;

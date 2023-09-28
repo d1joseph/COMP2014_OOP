@@ -44,13 +44,20 @@ void ChargingStation::getAllAttributes() {
 }
 
 int ChargingStation::distanceToSydney(int cityId) {
-    if (cityId == 0) {
+    int distance = 0;
+    
+    if (cityId < 0 | cityId > NUM_CITIES) {
+        cout << "error: invalid cityId" << endl;
+        return -1;
+    } else if (cityId == 0) {
         return 0;
     }
 
-    // calculate the distance from Sydney to cityId
-    int len = NAME_MAP_LENGTH;
-    return len;
+    for (int index = cityId; index >= 0; index--) {
+        distance += DISTANCE_MAP[index];
+    }
+    
+    return distance;
 }
 
 #endif // CHARGINGSTATION_H_

@@ -16,12 +16,20 @@ using namespace std;
 int main() {
     cout << "### EV Charging Scheduler v0 ###" << endl;
     
-    string city = NAME_MAP[0];
-    
-    ChargingStation *s = new ChargingStation(1, city, 802, 10);
-    int o = s->distanceToSydney(0);
-    cout << "value: " << o << endl;
+    int testId = 0;
+    string testCity = NAME_MAP[0];
+    int testDistance = DISTANCE_MAP[0];
+    int testNumOfChargers = CHARGERS_MAP[0];
 
-    Vehicle *v = new Vehicle();
-    v->getAllAttributes();
+    ChargingStation *s = new ChargingStation(
+        testId,
+        testCity,
+        testDistance,
+        testNumOfChargers
+    );
+    s->distanceToSydney(2);
+    s->getAllAttributes();
+
+    // Vehicle *v = new Vehicle();
+    // v->getAllAttributes();
 }

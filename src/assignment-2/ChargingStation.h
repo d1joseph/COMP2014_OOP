@@ -17,6 +17,7 @@ public:
     ~ChargingStation();
     // getAllAttributes
     void getAllAttributes();
+    int distanceToSydney(int cityId);
 };
 
 ChargingStation::ChargingStation(
@@ -40,6 +41,16 @@ void ChargingStation::getAllAttributes() {
     cout << "cityName: "<< cityName << endl;
     cout << "distanceTolastCity: " << distanceToLastCity << endl;
     cout << "numberOfChargers: " << numberOfChargers << endl;
+}
+
+int ChargingStation::distanceToSydney(int cityId) {
+    if (cityId == 0) {
+        return 0;
+    }
+
+    // calculate the distance from Sydney to cityId
+    int len = NAME_MAP_LENGTH;
+    return len;
 }
 
 #endif // CHARGINGSTATION_H_

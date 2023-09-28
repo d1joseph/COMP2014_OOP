@@ -19,7 +19,8 @@ int main() {
     string city = NAME_MAP[0];
     
     ChargingStation *s = new ChargingStation(1, city, 802, 10);
-    s->getAllAttributes();
+    int o = s->distanceToSydney(0);
+    cout << "value: " << o << endl;
 
     Vehicle *v = new Vehicle();
     v->getAllAttributes();

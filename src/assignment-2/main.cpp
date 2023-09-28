@@ -3,6 +3,7 @@
 // About: COMP2014 OOP Assignment 2 - EV charging schedule system
 
 #include <iostream>
+#include <iomanip>
 #include <string>
 #include <vector>
 #include "Constant.h"
@@ -14,22 +15,21 @@
 using namespace std;
 
 int main() {
-    cout << "### EV Charging Scheduler v0 ###" << endl;
+    srand(time(0));
+    cout << "### EV Charging Scheduler v0 ###" << endl << endl;
     
     int testId = 0;
-    string testCity = NAME_MAP[0];
-    int testDistance = DISTANCE_MAP[0];
-    int testNumOfChargers = CHARGERS_MAP[0];
-
+    string testCity = NAME_MAP[testId];
+    int testDistance = DISTANCE_MAP[testId];
+    int testNumOfChargers = CHARGERS_MAP[testId];
+    
     ChargingStation *s = new ChargingStation(
         testId,
         testCity,
         testDistance,
         testNumOfChargers
     );
-    s->distanceToSydney(2);
-    s->getAllAttributes();
-
-    // Vehicle *v = new Vehicle();
-    // v->getAllAttributes();
+    
+    Vehicle *v = new Vehicle();
+    v->getAllAttributes();
 }

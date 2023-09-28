@@ -13,6 +13,8 @@ const string NAME_MAP[] = {"Sydney", "Campbelltown", "Mittagong", "Goulburn",
 		"Yass", "Gundagai", "Holbrook",
 		"Albury", "Wangaratta", "Euroa", "Wallan", "Melbourne" };
 
+const int NAME_MAP_LENGTH = 12;
+
 const int NUM_CITIES = 12;
 
 const int MIN_DEMANDS = 150;

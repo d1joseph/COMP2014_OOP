@@ -11,6 +11,7 @@
 #include "DemandGenerator.h"
 #include "Vehicle.h"
 #include "ChargingStation.h"
+#include "Route.h"
 
 using namespace std;
 
@@ -29,8 +30,19 @@ int main() {
         testDistance,
         testNumOfChargers
     );
+
+    delete s;
     
     Vehicle *v = new Vehicle();
     v->getAllAttributes();
     v->getFarthestCityInRange();
+    
+    delete v;
+
+    Route *r = new Route(0,1000);
+
+    r->printAllChargingStations();
+
+    delete r;
+
 }

@@ -32,4 +32,5 @@ int main() {
     
     Vehicle *v = new Vehicle();
     v->getAllAttributes();
+    v->getFarthestCityInRange();
 }

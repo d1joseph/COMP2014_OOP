@@ -16,11 +16,11 @@ public:
 };
 
 Vehicle::Vehicle() {
-    vehicleId = 0;
-    currentCityId = 0;
-    destinationId = 0;
-    capacityRange = 1000;
-    remainingRange = 1000;
+    vehicleId = 0; // generate a uid
+    currentCityId = 0; // need to keep track of this at runtime
+    destinationId = 0; // does not change once set
+    capacityRange = 1000; // change to randomised value on init
+    remainingRange = 1000; // change to randomised value on init
 }
 
 Vehicle::~Vehicle() {
@@ -41,7 +41,11 @@ void Vehicle::getAllAttributes() {
 
 // by default, it should return "Campbelltown" cityId
 int Vehicle::getFarthestCityInRange() {
-    
+    // if battery full, if so, return next charging station
+    if (capacityRange == 1000) {
+        cout << "next charging station: " << NAME_MAP[currentCityId + 1] << endl;
+        return currentCityId + 1;
+    }
     return 0;
 }
 

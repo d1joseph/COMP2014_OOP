@@ -40,12 +40,14 @@ void Student::getUnitList() {
 
 void Student::setUnits() {
     string unitName;
-    for (int i = 0; i < numUnits; i++) {
-        cout << "enter subject " << i + 1 << " name: ";
-        cin >> unitName;
+    int i = 0;
+
+    while (i < numUnits) {
+        cout << "Enter subject " << i + 1 << " name: ";
+        getline(cin, unitName);
         unitList[i] = unitName;
+        i++;
     }
 }
-
 
 #endif // STUDENT_H_

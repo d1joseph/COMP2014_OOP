@@ -16,7 +16,7 @@ public:
     );
     ~ChargingStation();
     // getAllAttributes
-    void getAllAttributes();
+    void getAllAttributes() const;
     int distanceToSydney(int cityId);
 };
 
@@ -36,7 +36,7 @@ ChargingStation::~ChargingStation() {
 
 }
 
-void ChargingStation::getAllAttributes() {
+void ChargingStation::getAllAttributes() const {
     cout << "cityId: " << cityId << endl;
     cout << "cityName: "<< cityName << endl;
     cout << "distanceTolastCity: " << distanceToLastCity << endl;

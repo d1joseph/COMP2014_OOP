@@ -6,4 +6,8 @@ Methods for:
 #ifndef UTILITIES_H_
 #define UTILITIES_H_
 
+#include "../Vehicle.h"
+
+string GenerateId();
+
 #endif // UTILITIES_H_

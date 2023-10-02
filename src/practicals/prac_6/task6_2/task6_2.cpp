@@ -86,12 +86,12 @@ int main() {
     vector<DemandInput> demandInputs = demand->ReadLines();
     
     // column headers
-    cout << "Vehicle Id" << setw(20) << "Destination Id" << setw(20)
+    cout << setw(5) << "Vehicle Id" << setw(20) << "Destination Id" << setw(20)
     <<  "Capacity Range" << setw(20) << "Remaining range" << endl;
 
     // data
     for (const DemandInput& input : demandInputs) {
-        cout << input.VehicleId << setw(20) << input.DestinationId << setw(20)
+        cout << setw(5) << input.VehicleId << setw(20) << input.DestinationId << setw(20)
         <<  input.CapacityRange << setw(20) << input.RemainingRange << endl;
     }
 

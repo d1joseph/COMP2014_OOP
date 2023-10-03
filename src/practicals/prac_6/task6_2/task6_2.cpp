@@ -55,6 +55,8 @@ public:
         if (file.is_open()) {
             file.close();
         }
+
+        cout << "Demand destructed." << endl;
     }
     
     // read the file contents line-by-line 
@@ -80,7 +82,7 @@ public:
 };
 
 int main() {
-    string filePath = "C:/Users/dhivj/Dev/Learning/C++/COMP2014_OOP/src/assignment-2/demand/ChargingDemandsSample.txt";
+    string filePath = "C:\\users\\divjoseph\\Desktop\\Dev\\Learning\\C++\\COMP2014_OOP\\src\\assignment-2\\demand\\ChargingDemandsSample.txt";
     fstream demandFile(filePath);
     Demand *demand = new Demand("ChargingDemandsSample.txt",demandFile);
     vector<DemandInput> demandInputs = demand->ReadLines();

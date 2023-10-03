@@ -10,11 +10,12 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <random>
 #include "../../../assignment-2/Constant.h"
 
 using namespace std;
 
-struct DemandInputFields {
+struct DemandRequest {
     int VehicleId;
     int DestinationId;
     int CapacityRange;
@@ -25,22 +26,51 @@ class DemandGenerator {
 private:
     static const int defaultLimit = 100;
     int generationLimit;
-    string outputSavePath; // where to save the output text file
-    ofstream fileOut; // init an fstream object
+    string outputSavePath; // where to save the output file
+    ofstream fileOut; // init an fstream object to write the output file
+
+    // generates a random int in a given range
+    int getRandomInt(int min, int max) {
+        random_device rd;
+        mt19937 generator(rd()); // mersene twister engine
+        uniform_int_distribution<int> distribution(min, max);
+
+        return distribution(generator);
+    }
+
+    // generates and returns pseudo random data in a DemandRequest 
+    DemandRequest generateRequest(int vehicleId) {
+        DemandRequest newDemand;
+
+        newDemand.VehicleId = vehicleId;
+        newDemand.DestinationId = getRandomInt(1, NUM_CITIES);
+        newDemand.CapacityRange = getRandomInt(MIN_CAPACITY, MAX_CAPACITY);
+        newDemand.RemainingRange = getRandomInt(MIN_REMAIN_RANGE, MAX_CAPACITY);
+
+        return newDemand;
+    }
 public:
     DemandGenerator(const string& fileName, const string& path = "./", int limit = defaultLimit)
     : generationLimit(limit), outputSavePath(path + fileName) {        
         fileOut.open(outputSavePath);
-        cout << "opening file at: " << outputSavePath << endl;
+        cout << "creating demand file at: " << outputSavePath << endl;
 
         if (fileOut.is_open()) {
-            for (int i = 0; i < limit; i++) {
-                fileOut << "test line: [" << i + 1 << "]" << endl;
+            for (int vehicleId = 1; vehicleId <= limit; vehicleId++) {
+                DemandRequest newDemand = generateRequest(vehicleId);
+                fileOut << "[";
+                fileOut << newDemand.VehicleId << ",";
+                fileOut << newDemand.DestinationId << ",";
+                fileOut << newDemand.CapacityRange << ",";
+                fileOut << newDemand.RemainingRange;
+                fileOut << "]" << endl;
             }
         } else {
             cerr << "error: could not genenerate demand file '" << fileName << "'"
             << endl;
         }
+
+        cout << "successfully created '" << fileName << "' at: " << outputSavePath << endl;
     }
 
     ~DemandGenerator() {
@@ -63,7 +93,7 @@ int main() {
     DemandGenerator dg(
         outputFile,
         outputPath,
-        50
+        1000
     );
 
     return 0;

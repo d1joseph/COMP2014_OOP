@@ -50,8 +50,7 @@ double getMonthlyPayment(LoanAccount& theAccount) {
 	    return payment;
 }
 
-int main( )
-{
+void runTask6_4() {
     //test deposit account
 	cout << "Test deposit account --- " << endl;
 	DepositAccount dAccount;
@@ -73,5 +72,13 @@ int main( )
     cout.precision(2);
     cout << "The monthly payment of the loan is $"
          << getMonthlyPayment(lAccount) <<" for " << lAccount.term << " months."<< endl;
+}
+
+// test 1 - output is the same as runTask6_4()
+
+int main( )
+{   
+    runTask6_4();
+
     return 0;
 }

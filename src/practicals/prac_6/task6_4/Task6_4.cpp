@@ -1,84 +1,48 @@
 //Program to demonstrate the CDAccount structure type.
-#include <iostream>
 #include <cmath>
+#include <iostream>
 
 using namespace std;
 
-//The structure for a bank deposit account:
-struct DepositAccount {
-    double initialBalance;
-    double interestRate;
-    int term;//months until maturity
+#include "Account.h"
+
+class DepositAccount : public Account {
+public:
+    const void test() {
+        cout << "\nTest deposit account --- " << endl;
+        setAll();
+
+        cout.setf(ios::fixed);
+        cout.setf(ios::showpoint);
+        cout.precision(2);
+        cout << "The balance of deposit at maturity is $"
+        << getBalanceAtMaturity() <<" after " << term << " months."<< endl;
+    }
 };
 
-//The structure for a bank loan:
-struct LoanAccount {
-    double initialBalance;
-    double interestRate;
-    int term;//months until maturity
+class LoanAccount: public Account {
+public:
+    const void test() {
+        cout << "\nTest loan account --- " << endl;
+        setAll();
+
+        cout.setf(ios::fixed);
+        cout.setf(ios::showpoint);
+        cout.precision(2);
+        cout << "The monthly payment of the loan is $"
+        << getMonthlyPayment() <<" for " << term << " months."<< endl;
+    }
 };
-
-void inputData(DepositAccount& theAccount) {
-    cout << "Enter the amount of initial balance: $";
-    cin >> theAccount.initialBalance;
-    cout << "Enter interest rate percent per annual: ";
-    cin >> theAccount.interestRate;
-    cout << "Enter the number of months: ";
-    cin >> theAccount.term;
-}
-
-void inputData(LoanAccount& theAccount) {
-    cout << "Enter the amount of initial balance: $";
-    cin >> theAccount.initialBalance;
-    cout << "Enter interest rate percent per annual: ";
-    cin >> theAccount.interestRate;
-    cout << "Enter the number of months: ";
-    cin >> theAccount.term;
-}
-
-double getBalanceAtMaturity (DepositAccount& theAccount) {
-	   double rateFraction, interest;
-	    rateFraction = theAccount.interestRate/100.0;
-	    interest = theAccount.initialBalance*(rateFraction*(theAccount.term/12.0));//simple interest
-	    double balanceAtMaturity = theAccount.initialBalance + interest;
-        return balanceAtMaturity;
-}
-
-double getMonthlyPayment(LoanAccount& theAccount) {
-	    double rateFraction = theAccount.interestRate/(12.0*100.0);
-	    double payment = theAccount.initialBalance * (rateFraction + rateFraction / (pow(1+rateFraction,theAccount.term)-1.0));//simple interest
-	    return payment;
-}
-
-void runTask6_4() {
-    //test deposit account
-	cout << "Test deposit account --- " << endl;
-	DepositAccount dAccount;
-    inputData(dAccount);
-
-    cout.setf(ios::fixed);
-    cout.setf(ios::showpoint);
-    cout.precision(2);
-    cout << "The balance of deposit at maturity is $"
-         << getBalanceAtMaturity(dAccount) <<" after " << dAccount.term << " months."<< endl;
-
-    //test loan account
-	cout << "\nTest loan account --- " << endl;
-	LoanAccount lAccount;
-    inputData(lAccount);
-
-    cout.setf(ios::fixed);
-    cout.setf(ios::showpoint);
-    cout.precision(2);
-    cout << "The monthly payment of the loan is $"
-         << getMonthlyPayment(lAccount) <<" for " << lAccount.term << " months."<< endl;
-}
-
-// test 1 - output is the same as runTask6_4()
 
 int main( )
 {   
-    runTask6_4();
+    DepositAccount testDepositAccount;
+    testDepositAccount.test();
+    testDepositAccount.getAll();
+
+    LoanAccount testLoanAccount;
+    testLoanAccount.test();
+    testLoanAccount.getAll();
 
     return 0;
 }

@@ -7,10 +7,10 @@ protected:
     double interestRate; // 
     int term; // months until maturity
 public:
-    Account() {
-        initialBalance = 0.00;
-        interestRate = 0.0;
-        term = 0;
+    Account(double balance, double rate, int months) {
+        initialBalance = balance;
+        interestRate = rate;
+        term = months;
     };
     
     ~Account() {};

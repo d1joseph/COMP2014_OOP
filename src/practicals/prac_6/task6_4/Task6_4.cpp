@@ -8,6 +8,8 @@ using namespace std;
 
 class DepositAccount : public Account {
 public:
+    DepositAccount(double balance, double rate, int months) : Account(balance, rate, months) {}
+    
     const void test() {
         cout << "\nTest deposit account --- " << endl;
         setAll();
@@ -22,6 +24,8 @@ public:
 
 class LoanAccount: public Account {
 public:
+    LoanAccount(double balance, double rate, int months) : Account(balance, rate, months) {}
+
     const void test() {
         cout << "\nTest loan account --- " << endl;
         setAll();
@@ -36,11 +40,11 @@ public:
 
 int main( )
 {   
-    DepositAccount testDepositAccount;
+    DepositAccount testDepositAccount(0.0, 0.0, 0);
     testDepositAccount.test();
     testDepositAccount.getAll();
 
-    LoanAccount testLoanAccount;
+    LoanAccount testLoanAccount(0.0, 0.0, 0);
     testLoanAccount.test();
     testLoanAccount.getAll();
 

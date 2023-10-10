@@ -15,18 +15,15 @@ Vehicle ParseDataIntoVehicle(const string& line) {
     Vehicle vehicle;
 
     char discard;
-    if (
-        ss >>
-        vehicle.VehicleId >> 
-        discard >>
-        vehicle.DestinationId >> 
-        discard >>
-        vehicle.CapacityRange >> 
-        discard >>
-        vehicle.RemainingRange
-    ) {
-        return vehicle;
-    }
+    ss >>
+    vehicle.VehicleId >> 
+    discard >>
+    vehicle.DestinationId >> 
+    discard >>
+    vehicle.CapacityRange >> 
+    discard >>
+    vehicle.RemainingRange;
+    
     return vehicle;
 }
 

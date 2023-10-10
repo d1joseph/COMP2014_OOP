@@ -31,7 +31,7 @@ Vehicle ParseDataIntoVehicle(const string& line) {
 }
 
 // print out all vehicles in the vector and total count stored
-const void getAllVehicles(vector<Vehicle>& vehicles) {
+static void getAllVehicles(vector<Vehicle>& vehicles) {
     int listLength = vehicles.size();
     for (int vehicle = 0; vehicle < listLength; vehicle++) {
         cout << "vehicleId: " << vehicles[vehicle].VehicleId << endl;

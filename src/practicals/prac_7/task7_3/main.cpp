@@ -3,8 +3,10 @@
 #include <vector>
 #include <fstream>
 #include <sstream>
+#include <algorithm>
 
 #include "Vehicle.h"
+#include "../../../assignment-2/Constant.h"
 
 using namespace std;
 
@@ -38,9 +40,33 @@ static void getAllVehicles(vector<Vehicle>& vehicles) {
         cout << "remainingRange: " << vehicles[vehicle].RemainingRange << endl << endl;
     }
     
-    cout << "total vehicles: " << listLength;
+    cout << "total vehicles: " << listLength << endl;
 }
 
+static int calculateDistance(const int DISTANCE_MAP[], int& currentCityId, int& destinationCityId) {
+    if (currentCityId < 0 || destinationCityId >= NUM_CITIES || currentCityId > destinationCityId) {
+        return 0;
+    }
+
+    int distanceToDestination;
+    for (int index = currentCityId; index <= destinationCityId; index++) {
+        distanceToDestination += DISTANCE_MAP[index];
+    }
+
+    return distanceToDestination;
+}
+
+static void deleteVehicle(vector<Vehicle>& vehicles) {
+    for (auto it = vehicles.begin(); it != vehicles.end();) {
+        int distanceToDestination = calculateDistance(DISTANCE_MAP, it->CurrentCityId, it->DestinationId);
+        
+        if (it->RemainingRange >= distanceToDestination) {
+            it = vehicles.erase(it); // Remove the vehicle from the vector
+        } else {
+            ++it;
+        }
+    }
+}
 
 int main() {
     vector<Vehicle> vehicles;
@@ -60,7 +86,15 @@ int main() {
 	}
     fin.close();
 
+    int sizeBefore = vehicles.size();
+
+    deleteVehicle(vehicles);
+
+    int sizeAfter = vehicles.size();
+
     getAllVehicles(vehicles);
+    cout << "size before operation: " << sizeBefore << endl;
+    cout << "size after operation: " << sizeAfter << endl;
 	
 	return 0;
 }

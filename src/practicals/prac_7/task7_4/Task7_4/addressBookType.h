@@ -6,6 +6,7 @@
 #include <string>
 #include <fstream>
 #include "extPersonType.h"
+#include "addressType.h"
 
 using namespace std;
 
@@ -79,8 +80,10 @@ void addressBookType::saveData()
     for (int i = 0; i < length; i++)
     {
     	//Add code here to store all address data in list into the file dataOut.txt
-        
-    outFile << "TBA" << endl;
+		addressType address = list[i].getAddress();
+		address.getDetails(street, city, state, zip);
+		
+    	outFile << street << city << state << zip << endl;
 
     }
     outFile.close();

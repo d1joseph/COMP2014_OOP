@@ -82,8 +82,9 @@ void addressBookType::saveData()
     	//Add code here to store all address data in list into the file dataOut.txt
 		addressType address = list[i].getAddress();
 		address.getDetails(street, city, state, zip);
-		
-    	outFile << street << city << state << zip << endl;
+
+		outFile << "First Name: " << list[i].getFirstName() << "\n" << "Last Name: " << list[i].getLastName() << "\n";
+    	outFile << "Address: " << street << " " << city << " " << state << " " << zip << " " << endl << endl;
 
     }
     outFile.close();

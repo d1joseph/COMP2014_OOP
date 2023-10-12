@@ -11,12 +11,12 @@ class addressType
 public:
     addressType(string sAddress = "", string c = "",
                 string s = "", string z = "");
-    void setAddress(string sAddress, string c, string s, string z);
-    void getDetails(string& sAddress, string& c,
+    virtual void setAddress(string sAddress, string c, string s, string z);
+    virtual void getDetails(string& sAddress, string& c,
                     string& s, string& z);
-    void print() const;
+    virtual void print() const;
 
-private:
+protected:
     string streetAddress;
     string city;
     string state;

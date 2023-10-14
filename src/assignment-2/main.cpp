@@ -20,6 +20,7 @@ collaboration has been authorised by the subject lecturer concerned.
 #include "Constant.h"
 #include "ChargingAllocation.h"
 #include "DemandGenerator.h"
+#include "EVCharging.h"
 #include "Vehicle.h"
 #include "ChargingStation.h"
 #include "lib/Utilities.cpp"
@@ -28,25 +29,8 @@ using namespace std;
 
 int main() {
     srand(time(0));
-    cout << "### EV Charging Scheduler v0 ###" << endl << endl;
+    cout << "### EV Charging Scheduler ###" << endl << endl;
     
-    int testId = 0;
-    string testCity = NAME_MAP[testId];
-    int testDistance = DISTANCE_MAP[testId];
-    int testNumOfChargers = CHARGERS_MAP[testId];
+    EVCharging ev;
     
-    ChargingStation *s = new ChargingStation(
-        testId,
-        testCity,
-        testDistance,
-        testNumOfChargers
-    );
-
-    delete s;
-    
-    Vehicle *v = new Vehicle();
-    v->getAllAttributes();
-    v->getFarthestCityInRange();
-    
-    delete v;
 }

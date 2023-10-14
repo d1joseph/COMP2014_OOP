@@ -12,6 +12,7 @@ private:
     int remainingRange; // in kilometers 
 public:
     Vehicle();
+    Vehicle(string& id, int& cId, int& dId, int& capacity, int& remaining);
     ~Vehicle();
     void getAllAttributes(); // print out all attributes
     int getFarthestCityInRange(); // calculate the farthest city in remainingRange
@@ -23,6 +24,16 @@ Vehicle::Vehicle() {
     destinationId = 0; // does not change once set
     capacityRange = 1000; // change to randomised value on init
     remainingRange = 1000; // change to randomised value on init
+}
+
+Vehicle::Vehicle(string& id, int& cId, int& dId, int& capacity, int& remaining):
+vehicleId(id),
+currentCityId(cId),
+destinationId(dId),
+capacityRange(capacity),
+remainingRange(remaining)
+{
+    
 }
 
 Vehicle::~Vehicle() {

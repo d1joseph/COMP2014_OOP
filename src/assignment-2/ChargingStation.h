@@ -17,7 +17,7 @@ public:
     ~ChargingStation();
     // getAllAttributes
     void getAllAttributes() const;
-    int distanceToSydney(int cityId);
+    int distanceToSydney(int& cityId);
 };
 
 ChargingStation::ChargingStation(
@@ -43,7 +43,7 @@ void ChargingStation::getAllAttributes() const {
     cout << "numberOfChargers: " << numberOfChargers << endl;
 }
 
-int ChargingStation::distanceToSydney(int cityId) {
+int ChargingStation::distanceToSydney(int& cityId) {
     int distance = 0;
     
     if (cityId < 0 | cityId > NUM_CITIES) {

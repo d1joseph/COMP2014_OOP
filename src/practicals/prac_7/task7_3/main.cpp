@@ -48,7 +48,7 @@ static int calculateDistance(const int DISTANCE_MAP[], int& currentCityId, int& 
         return 0;
     }
 
-    int distanceToDestination;
+    int distanceToDestination = 0;
     for (int index = currentCityId; index <= destinationCityId; index++) {
         distanceToDestination += DISTANCE_MAP[index];
     }

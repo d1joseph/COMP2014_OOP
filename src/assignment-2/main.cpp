@@ -19,10 +19,10 @@ collaboration has been authorised by the subject lecturer concerned.
 
 #include "Constant.h"
 #include "ChargingAllocation.h"
-#include "DemandGenerator.h"
+// #include "DemandGenerator.h"
+#include "ChargingStation.h"
 #include "EVCharging.h"
 #include "Vehicle.h"
-#include "ChargingStation.h"
 #include "lib/Utilities.cpp"
 
 using namespace std;
@@ -32,5 +32,6 @@ int main() {
     cout << "### EV Charging Scheduler ###" << endl << endl;
     
     EVCharging ev;
+    ev.run();
     
 }

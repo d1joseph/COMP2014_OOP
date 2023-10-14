@@ -16,8 +16,8 @@ public:
     );
     ~ChargingStation();
     // getAllAttributes
-    void getAllAttributes() const;
-    int distanceToSydney(int& cityId);
+    void getStationInformation() const;
+    static int distanceToSydney(int cityId);
 };
 
 ChargingStation::ChargingStation(
@@ -36,16 +36,12 @@ ChargingStation::~ChargingStation() {
 
 }
 
-void ChargingStation::getAllAttributes() const {
-    cout << "cityId: " << cityId << endl;
-    cout << "cityName: "<< cityName << endl;
-    cout << "distanceTolastCity: " << distanceToLastCity << endl;
-    cout << "numberOfChargers: " << numberOfChargers << endl;
+void ChargingStation::getStationInformation() const {
+    cout << setw(5) << cityId << setw(20) << cityName << setw(20)
+    <<  distanceToSydney(cityId) << setw(20) << numberOfChargers << endl;
 }
 
-int ChargingStation::distanceToSydney(int& cityId) {
-    int distance = 0;
-    
+int ChargingStation::distanceToSydney(int cityId) {
     if (cityId < 0 | cityId > NUM_CITIES) {
         cout << "error: invalid cityId" << endl;
         return -1;
@@ -53,6 +49,7 @@ int ChargingStation::distanceToSydney(int& cityId) {
         return 0;
     }
 
+    int distance = 0;
     for (int index = cityId; index >= 0; index--) {
         distance += DISTANCE_MAP[index];
     }

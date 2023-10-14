@@ -3,26 +3,53 @@
 
 class EVCharging {
 private:
-    // ChargingStation
-    <ChargingStation> chargingStations;
-    // vector of EVs
-    <Vehicle> vehicles;
-    DemandGenerator demands;
+    vector<ChargingStation> chargingStations;
 public:
-    // start
     EVCharging();
     ~EVCharging();
+    void getChargingStations() const;
+    void load() const;
+    void getDemand() const;
+    void run() const;
 };
 
 EVCharging::EVCharging() {
+    // init charging stations
     for (int s = 0; s < NUM_CITIES; s++) {
-        ChargingStation chargingStation(i, NAME_MAP[i], DISTANCE_MAP[i], CHARGERS_MAP[i]);
+        ChargingStation chargingStation(s, NAME_MAP[s], DISTANCE_MAP[s], CHARGERS_MAP[s]);
         chargingStations.push_back(chargingStation);
+    }
+
+    // generate demand
+}
+
+EVCharging::~EVCharging() {}
+
+void EVCharging::getChargingStations() const {
+    cout << "Charging Station information:" << endl;
+    
+    // column headers
+    cout << setw(5) << "Location Id" << setw(20) << "Location Name" << setw(20)
+    <<  "Distance To Sydney" << setw(20) << "no of Chargers" << endl;
+
+    for (int stationId = 0; stationId < NUM_CITIES; stationId++) {
+        chargingStations[stationId].getStationInformation();
     }
 }
 
-EVCharging::~EVCharging() {
-    cout << "shutting down EVS." << endl;
+void EVCharging::load() const {}
+
+void EVCharging::getDemand() const {}
+
+void EVCharging::run() const {
+    // populate vehicles with demand data
+    // output demand of each vehicle
+    // output information for each charging station
+    getChargingStations();
+    // allocate vehicles to charging stations
+    // output information about allocation with average wait times
+    // improve allocation
+    // output information about allocation with average wait times
 }
 
 #endif // EVCHARGING_H_

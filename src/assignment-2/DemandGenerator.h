@@ -3,7 +3,7 @@
 
 class DemandGenerator {
 private:
-    static const int defaultLimit = 200;
+    static const int defaultLimit = MIN_DEMANDS;
     int generationLimit;
     string outputSavePath; // where to save the output file
     ofstream fileOut; // init an fstream object to write the output file
@@ -19,14 +19,14 @@ private:
 
     // generates and returns pseudo random data in a DemandRequest 
     Vehicle generateRequest(int vehicleId) {
-        Vehicle newDemand;
+        Vehicle vehicle;
 
-        newDemand.vehicleId = vehicleId;
-        newDemand.destinationId = getRandomInt(1, NUM_CITIES);
-        newDemand.capacityRange = getRandomInt(MIN_CAPACITY, MAX_CAPACITY);
-        newDemand.remainingRange = getRandomInt(MIN_REMAIN_RANGE, MAX_CAPACITY);
+        vehicle.vehicleId = vehicleId;
+        vehicle.destinationId = getRandomInt(1, NUM_CITIES);
+        vehicle.capacityRange = getRandomInt(MIN_CAPACITY, MAX_CAPACITY);
+        vehicle.remainingRange = getRandomInt(MIN_REMAIN_RANGE, MAX_CAPACITY);
 
-        return newDemand;
+        return vehicle;
     }
 public:
     DemandGenerator(const string& fileName, const string& path = "./", int limit = defaultLimit)
@@ -36,12 +36,12 @@ public:
 
         if (fileOut.is_open()) {
             for (int vehicleId = 1; vehicleId <= limit; vehicleId++) {
-                Vehicle newDemand = generateRequest(vehicleId);
+                Vehicle vehicle = generateRequest(vehicleId);
                 fileOut << "[";
-                fileOut << newDemand.VehicleId << ",";
-                fileOut << newDemand.DestinationId << ",";
-                fileOut << newDemand.CapacityRange << ",";
-                fileOut << newDemand.RemainingRange;
+                fileOut << vehicle.VehicleId << ",";
+                fileOut << vehicle.DestinationId << ",";
+                fileOut << vehicle.CapacityRange << ",";
+                fileOut << vehicle.RemainingRange;
                 fileOut << "]" << endl;
             }
         } else {

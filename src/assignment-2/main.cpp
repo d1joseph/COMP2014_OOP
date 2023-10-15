@@ -12,6 +12,7 @@ collaboration has been authorised by the subject lecturer concerned.
 */
 
 #include <iostream>
+#include <filesystem>
 #include <iomanip>
 #include <string>
 #include <vector>
@@ -19,8 +20,8 @@ collaboration has been authorised by the subject lecturer concerned.
 #include <fstream>
 
 #include "Constant.h"
+#include "DemandGenerator.h"
 #include "ChargingAllocation.h"
-// #include "DemandGenerator.h"
 #include "ChargingStation.h"
 #include "EVCharging.h"
 #include "Vehicle.h"

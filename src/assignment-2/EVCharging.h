@@ -11,9 +11,9 @@ public:
     EVCharging();
     ~EVCharging();
     void getChargingStations() const;
-    void load(fstream& demandFile, string& fileName) const;
+    void load(fstream& demandFile, const string& fileName);
     void getVehicles() const;
-    void run() const;
+    void run();
 };
 
 EVCharging::EVCharging() {
@@ -21,17 +21,6 @@ EVCharging::EVCharging() {
     for (int s = 0; s < NUM_CITIES; s++) {
         ChargingStation chargingStation(s, NAME_MAP[s], DISTANCE_MAP[s], CHARGERS_MAP[s]);
         chargingStations.push_back(chargingStation);
-    }
-
-    for (int v = 0; v < MAX_DEMANDS; v++) {
-        int id = MAX_DEMANDS + v;
-        int currentCity = 0;
-        int destinationId = 11;
-        int capacityRange = MAX_CAPACITY;
-        int remainingRange = GenerateRemainingRange();
-
-        Vehicle testVehicle(id, currentCity, destinationId, capacityRange, remainingRange);
-        vehicles.push_back(testVehicle);
     }
 }
 
@@ -49,11 +38,23 @@ void EVCharging::getChargingStations() const {
     }
 }
 
-void EVCharging::load(fstream& demandFile, string& fileName) const {
+void EVCharging::load(fstream& demandFile, const string& fileName) {
     cout << "reading file: " << fileName << endl << endl;
-    // load the demand data into each vehicle object
-    // add each vehicle to the vehicles vector
-    // generate demand
+    
+    if (!demandFile.is_open()) {
+        cerr << "error: could not open '" << fileName << "'" << endl;
+        return;
+    }
+
+    string line;
+    while(getline(demandFile, line)) {
+        Vehicle vehicle;
+        if (vehicle.setAttributes(line)) {
+            vehicles.push_back(vehicle);
+        } else {
+            cerr << "error: unable to parse data from line: " << line << endl;
+        }
+    }
 }
 
 void EVCharging::getVehicles() const {
@@ -69,16 +70,21 @@ void EVCharging::getVehicles() const {
     cout << endl;
 }
 
-void EVCharging::run() const {
-    // output demand information of each vehicle
+void EVCharging::run() {
     string fileName = "ChargingDemands.txt";
     fstream demandFile(fileName);
+    
+    if (!filesystem::exists(fileName)) {
+        DemandGenerator demand;
+        demand.Generate(fileName);
+    }
+
     load(demandFile, fileName);
 
     getVehicles();
     
-    // output information for each charging station
     getChargingStations();
+
     // allocate vehicles to charging stations
     // output information about allocation with average wait times
     // improve allocation

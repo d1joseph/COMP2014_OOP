@@ -10,7 +10,6 @@ public:
     EVCharging();
     ~EVCharging();
     void getChargingStations() const;
-    void load(fstream& demandFile, const string& fileName);
     void getVehicles() const;
     void run();
 };
@@ -37,25 +36,6 @@ void EVCharging::getChargingStations() const {
     }
 }
 
-void EVCharging::load(fstream& demandFile, const string& fileName) {
-    cout << "reading file: " << fileName << endl << endl;
-    
-    if (!demandFile.is_open()) {
-        cerr << "error: could not open '" << fileName << "'" << endl;
-        return;
-    }
-
-    string line;
-    while(getline(demandFile, line)) {
-        Vehicle vehicle;
-        if (vehicle.setAttributes(line)) {
-            vehicles.push_back(vehicle);
-        } else {
-            cerr << "error: unable to parse data from line: " << line << endl;
-        }
-    }
-}
-
 void EVCharging::getVehicles() const {
     cout << "Vehicle information:" << endl;
 
@@ -78,7 +58,7 @@ void EVCharging::run() {
         demand.Generate(fileName);
     }
 
-    load(demandFile, fileName);
+    chargingAllocator.load(demandFile, fileName);
 
     getVehicles();
     

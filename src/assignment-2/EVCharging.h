@@ -1,12 +1,11 @@
 #ifndef EVCHARGING_H_
 #define EVCHARGING_H_
 
-#include "Vehicle.h"
-
 class EVCharging {
 private:
     vector<ChargingStation> chargingStations;
     vector<Vehicle> vehicles;
+    ChargingAllocation chargingAllocator;
 public:
     EVCharging();
     ~EVCharging();
@@ -16,7 +15,7 @@ public:
     void run();
 };
 
-EVCharging::EVCharging() {
+EVCharging::EVCharging(): chargingAllocator(&vehicles) {
     // init charging stations
     for (int s = 0; s < NUM_CITIES; s++) {
         ChargingStation chargingStation(s, NAME_MAP[s], DISTANCE_MAP[s], CHARGERS_MAP[s]);
@@ -87,6 +86,11 @@ void EVCharging::run() {
 
     // allocate vehicles to charging stations
     // output information about allocation with average wait times
+    cout << "Vehicle information using chargingAllocator:" << endl;
+    for (const Vehicle& vehicle : vehicles) {
+        chargingAllocator.displayVehicleInfo(vehicle);
+    }
+
     // improve allocation
     // output information about allocation with average wait times
 }

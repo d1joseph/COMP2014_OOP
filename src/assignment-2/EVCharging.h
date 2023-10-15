@@ -71,8 +71,8 @@ void EVCharging::run() {
         chargingAllocator.displayVehicleInfo(vehicle);
     }
 
-    // improve allocation
-    // output information about allocation with average wait times
+    chargingAllocator.getAllocationInfo();
+    chargingAllocator.getQueueLengthAndTime();
 }
 
 #endif // EVCHARGING_H_

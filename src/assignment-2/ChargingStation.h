@@ -46,7 +46,7 @@ int ChargingStation::distanceToSydney(int cityId) {
         cout << "error: invalid cityId" << endl;
         return -1;
     } else if (cityId == 0) {
-        return 0;
+        return 0; // already at sydney
     }
 
     int distance = 0;

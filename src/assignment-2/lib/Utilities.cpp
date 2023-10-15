@@ -22,3 +22,8 @@ string GenerateId() {
 
     return uniqueID;
 }
+
+int GenerateRemainingRange() {
+    int remainingRange = std::rand() % MIN_REMAIN_RANGE;
+    return remainingRange;
+}

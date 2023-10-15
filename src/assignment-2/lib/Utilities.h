@@ -9,5 +9,6 @@ Methods for:
 #include "../Vehicle.h"
 
 string GenerateId();
+int GenerateRemainingRange();
 
 #endif // UTILITIES_H_

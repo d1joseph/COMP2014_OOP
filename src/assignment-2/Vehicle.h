@@ -5,61 +5,64 @@
 
 class Vehicle {
 private:
-    string vehicleId; // can be any integer
-    int currentCityId; // initialised with 0 for Sydney
-    int destinationId; // any city other than Sydney
-    int capacityRange; // in kilometers
-    int remainingRange; // in kilometers 
+    int vehicleId;
+    int currentCityId;
+    int destinationId;
+    int capacityRange;
+    int remainingRange;
+    bool isCharging;
+    bool fullCharge;
 public:
     Vehicle();
-    Vehicle(string& id, int& cId, int& dId, int& capacity, int& remaining);
+    Vehicle(int& id, int& cId, int& dId, int& capacity, int& remaining);
     ~Vehicle();
-    void getAllAttributes(); // print out all attributes
-    int getFarthestCityInRange(); // calculate the farthest city in remainingRange
+    void getVehicleInformation() const; // print out all attributes
+    int getFarthestCityInRange() const; // calculate the farthest city in remainingRange
+    int setRemainingRange(); // use to set and update the remainingRange;
+    int decrementRemainingRange(); // reduce remaining range
+    int setCurrentCity(int& cityId);
 };
 
 Vehicle::Vehicle() {
-    vehicleId = GenerateId(); // generate a uid
-    currentCityId = 0; // need to keep track of this at runtime
-    destinationId = 0; // does not change once set
-    capacityRange = 1000; // change to randomised value on init
-    remainingRange = 1000; // change to randomised value on init
+    vehicleId = 0;
+    currentCityId = 0;
+    destinationId = 0;
+    capacityRange = MAX_CAPACITY;
+    remainingRange = GenerateRemainingRange();
 }
 
-Vehicle::Vehicle(string& id, int& cId, int& dId, int& capacity, int& remaining):
+Vehicle::Vehicle(int& id, int& cId, int& dId, int& capacity, int& remaining):
 vehicleId(id),
 currentCityId(cId),
 destinationId(dId),
 capacityRange(capacity),
 remainingRange(remaining)
 {
-    
+    fullCharge = true;
 }
 
 Vehicle::~Vehicle() {
     
 }
 
-void Vehicle::getAllAttributes() {
-    cout << "vehicleId: " << vehicleId << endl;
-    cout << "currentCityId: " << currentCityId << endl;
-    cout << "destinationId: " << destinationId << endl;
-    cout << "capacityRange: " << capacityRange << endl;
-    cout << "remainingRange: " << remainingRange << endl;
+void Vehicle::getVehicleInformation() const {
+    cout << setw(5) << vehicleId << setw(20) << NAME_MAP[currentCityId] << setw(20)
+    <<  NAME_MAP[destinationId] << setw(20) << capacityRange << setw(20) << remainingRange << endl;
 }
 
 // return the cityId of the farthest city in range given
 // it's current battery %. If battery is full, return cityId
 // of next charging station.
 
-// by default, it should return "Campbelltown" cityId
-int Vehicle::getFarthestCityInRange() {
-    // if battery full, if so, return next charging station
-    if (capacityRange == 1000) {
+int Vehicle::getFarthestCityInRange() const {
+    // if battery full return next charging station from currentCity
+    if (fullCharge) {
         cout << "next charging station: " << NAME_MAP[currentCityId + 1] << endl;
-        return currentCityId + 1;
+        return currentCityId  + 1;
     }
+
     // calculate farthest city given remainingRange
+    int farthestCityId = currentCityId;
 
     return 0;
 }

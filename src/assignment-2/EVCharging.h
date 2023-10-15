@@ -1,15 +1,18 @@
 #ifndef EVCHARGING_H_
 #define EVCHARGING_H_
 
+#include "Vehicle.h"
+
 class EVCharging {
 private:
     vector<ChargingStation> chargingStations;
+    vector<Vehicle> vehicles;
 public:
     EVCharging();
     ~EVCharging();
     void getChargingStations() const;
-    void load() const;
-    void getDemand() const;
+    void load(fstream& demandFile, string& fileName) const;
+    void getVehicles() const;
     void run() const;
 };
 
@@ -20,7 +23,16 @@ EVCharging::EVCharging() {
         chargingStations.push_back(chargingStation);
     }
 
-    // generate demand
+    for (int v = 0; v < MAX_DEMANDS; v++) {
+        int id = MAX_DEMANDS + v;
+        int currentCity = 0;
+        int destinationId = 11;
+        int capacityRange = MAX_CAPACITY;
+        int remainingRange = GenerateRemainingRange();
+
+        Vehicle testVehicle(id, currentCity, destinationId, capacityRange, remainingRange);
+        vehicles.push_back(testVehicle);
+    }
 }
 
 EVCharging::~EVCharging() {}
@@ -37,13 +49,34 @@ void EVCharging::getChargingStations() const {
     }
 }
 
-void EVCharging::load() const {}
+void EVCharging::load(fstream& demandFile, string& fileName) const {
+    cout << "reading file: " << fileName << endl << endl;
+    // load the demand data into each vehicle object
+    // add each vehicle to the vehicles vector
+    // generate demand
+}
 
-void EVCharging::getDemand() const {}
+void EVCharging::getVehicles() const {
+    cout << "Vehicle information:" << endl;
+
+    cout << setw(5) << "vehicleId" << setw(20) << "Origin" << setw(20)
+    <<  "Destination" << setw(20) << "Capacity Range" << setw(20) << "Remaining Range" << endl;
+
+    for (int vehicleId = 0; vehicleId < MAX_DEMANDS; vehicleId++) {
+        vehicles[vehicleId].getVehicleInformation();
+    }
+
+    cout << endl;
+}
 
 void EVCharging::run() const {
-    // populate vehicles with demand data
-    // output demand of each vehicle
+    // output demand information of each vehicle
+    string fileName = "ChargingDemands.txt";
+    fstream demandFile(fileName);
+    load(demandFile, fileName);
+
+    getVehicles();
+    
     // output information for each charging station
     getChargingStations();
     // allocate vehicles to charging stations

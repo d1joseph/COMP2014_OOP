@@ -18,7 +18,7 @@ private:
     }
 
     // generates and returns pseudo random data in a DemandRequest 
-    Vehicle generateRequest(int vehicleId) {
+    Vehicle generateDemand(int vehicleId) {
         Vehicle vehicle;
 
         vehicle.vehicleId = vehicleId;
@@ -36,7 +36,7 @@ public:
 
         if (fileOut.is_open()) {
             for (int vehicleId = 1; vehicleId <= limit; vehicleId++) {
-                Vehicle vehicle = generateRequest(vehicleId);
+                auto vehicle = generateDemand(vehicleId);
                 fileOut << "[";
                 fileOut << vehicle.VehicleId << ",";
                 fileOut << vehicle.DestinationId << ",";

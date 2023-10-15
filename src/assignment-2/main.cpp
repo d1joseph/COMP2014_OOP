@@ -16,6 +16,7 @@ collaboration has been authorised by the subject lecturer concerned.
 #include <string>
 #include <vector>
 #include <random>
+#include <fstream>
 
 #include "Constant.h"
 #include "ChargingAllocation.h"
@@ -33,5 +34,6 @@ int main() {
     
     EVCharging ev;
     ev.run();
+    
     
 }

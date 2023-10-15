@@ -8,8 +8,6 @@ private:
     int destinationId;
     int capacityRange;
     int remainingRange;
-    bool isCharging;
-    bool fullCharge;
 public:
     Vehicle();
     Vehicle(int& id, int& cId, int& dId, int& capacity, int& remaining);
@@ -32,10 +30,7 @@ vehicleId(id),
 currentCityId(cId),
 destinationId(dId),
 capacityRange(capacity),
-remainingRange(remaining)
-{
-    fullCharge = true;
-}
+remainingRange(remaining){}
 
 Vehicle::~Vehicle() {
     
@@ -47,13 +42,7 @@ void Vehicle::getVehicleInformation() const {
 }
 
 int Vehicle::getFarthestCityInRange() const {
-    if (fullCharge) {
-        cout << "next charging station: " << NAME_MAP[currentCityId + 1] << endl;
-        return currentCityId  + 1;
-    }
-
-    int farthestCityId = currentCityId;
-
+    // calculate the farthest city that can be travelled to here ...
     return 0;
 }
 

@@ -10,5 +10,6 @@ Methods for:
 
 string GenerateId();
 int GenerateRemainingRange();
+int GenerateRandomInt(int min, int max);
 
 #endif // UTILITIES_H_

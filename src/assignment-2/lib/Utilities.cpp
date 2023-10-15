@@ -27,3 +27,11 @@ int GenerateRemainingRange() {
     int remainingRange = std::rand() % MIN_REMAIN_RANGE;
     return remainingRange;
 }
+
+int GenerateRandomInt(int min, int max) {
+    random_device rd;
+    mt19937 generator(rd()); // mersene twister engine
+    uniform_int_distribution<int> distribution(min, max);
+
+    return distribution(generator);
+}

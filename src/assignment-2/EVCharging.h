@@ -64,14 +64,8 @@ void EVCharging::run() {
     
     getChargingStations();
 
-    // allocate vehicles to charging stations
-    // output information about allocation with average wait times
-    cout << "Vehicle information using chargingAllocator:" << endl;
-    for (const Vehicle& vehicle : vehicles) {
-        chargingAllocator.displayVehicleInfo(vehicle);
-    }
-
     chargingAllocator.getAllocationInfo();
+    
     chargingAllocator.getQueueLengthAndTime();
 }
 

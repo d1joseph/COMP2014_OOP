@@ -1,8 +1,6 @@
 #ifndef VEHICLE_H_
 #define VEHICLE_H_
 
-#include "lib/Utilities.h"
-
 class Vehicle {
 private:
     int vehicleId;

@@ -35,6 +35,4 @@ int main() {
     
     EVCharging ev;
     ev.run();
-    
-    
 }

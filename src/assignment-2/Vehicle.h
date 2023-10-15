@@ -18,9 +18,7 @@ public:
     ~Vehicle();
     void getVehicleInformation() const; // print out all attributes
     int getFarthestCityInRange() const; // calculate the farthest city in remainingRange
-    int setRemainingRange(); // use to set and update the remainingRange;
-    int decrementRemainingRange(); // reduce remaining range
-    int setCurrentCity(int& cityId);
+    bool setAttributes(const string&);
 };
 
 Vehicle::Vehicle() {
@@ -65,6 +63,25 @@ int Vehicle::getFarthestCityInRange() const {
     int farthestCityId = currentCityId;
 
     return 0;
+}
+
+bool Vehicle::setAttributes(const string& line) {
+    string lineWithoutBrackets = line.substr(1, line.length() - 2);
+    stringstream ss(lineWithoutBrackets);
+
+    char discard;
+    if (
+        ss >>
+        vehicleId >> 
+        discard >>
+        destinationId >> 
+        discard >>
+        capacityRange >> 
+        discard >>
+        remainingRange
+    ) {return true;}
+
+    return false; // parsing failed
 }
 
 #endif // VEHICLE_H_

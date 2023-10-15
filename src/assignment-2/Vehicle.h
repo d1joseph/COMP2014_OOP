@@ -13,8 +13,14 @@ public:
     Vehicle(int& id, int& cId, int& dId, int& capacity, int& remaining);
     ~Vehicle();
     void getVehicleInformation() const;
+    int getVehicleId() const;
+    int getCurrentCityId() const;
+    int getDestinationId() const;
+    int getRemainingRange() const;
     int getFarthestCityInRange() const;
     bool setAttributes(const string&);
+    void setCurrentCityId(int&);
+    void setRemainingRange();
 };
 
 Vehicle::Vehicle() {
@@ -41,9 +47,39 @@ void Vehicle::getVehicleInformation() const {
     <<  NAME_MAP[destinationId] << setw(20) << capacityRange << setw(20) << remainingRange << endl;
 }
 
+int Vehicle::getVehicleId() const {
+    return vehicleId;
+}
+
+int Vehicle::getCurrentCityId() const {
+    return currentCityId;
+}
+
+int Vehicle::getDestinationId() const {
+    return destinationId;
+}
+
+int Vehicle::getRemainingRange() const {
+    return remainingRange;
+}
+
 int Vehicle::getFarthestCityInRange() const {
-    // calculate the farthest city that can be travelled to here ...
-    return 0;
+    int totalDistance = 0;
+    int farthestCityId = currentCityId;
+
+    // Iterate through the distance map to find the farthest city within the remaining range
+    for (int cityId = currentCityId + 1; cityId < NUM_CITIES; cityId++) {
+        totalDistance += DISTANCE_MAP[cityId - 1];
+
+        // Check if the total distance exceeds the remaining range
+        if (totalDistance > remainingRange) {
+            break; // The farthest city is within the remaining range
+        }
+
+        farthestCityId = cityId;
+    }
+
+    return farthestCityId;
 }
 
 bool Vehicle::setAttributes(const string& line) {
@@ -63,6 +99,14 @@ bool Vehicle::setAttributes(const string& line) {
     ) {return true;}
 
     return false;
+}
+
+void Vehicle::setCurrentCityId(int& cityId) {
+    currentCityId = cityId;
+}
+
+void Vehicle::setRemainingRange() {
+    
 }
 
 #endif // VEHICLE_H_

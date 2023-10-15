@@ -65,12 +65,12 @@ public:
                 fileOut << newDemand.RemainingRange;
                 fileOut << "]" << endl;
             }
+
+            cout << "successfully created '" << fileName << "' at: " << outputSavePath << endl;
         } else {
             cerr << "error: could not genenerate demand file '" << fileName << "'"
             << endl;
         }
-
-        cout << "successfully created '" << fileName << "' at: " << outputSavePath << endl;
     }
 
     ~DemandGenerator() {

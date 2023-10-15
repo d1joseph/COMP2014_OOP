@@ -28,7 +28,7 @@ Vehicle::Vehicle() {
     currentCityId = 0;
     destinationId = 0;
     capacityRange = MAX_CAPACITY;
-    remainingRange = GenerateRemainingRange();
+    remainingRange = 0;
 }
 
 Vehicle::Vehicle(int& id, int& cId, int& dId, int& capacity, int& remaining):

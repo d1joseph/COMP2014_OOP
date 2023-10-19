@@ -6,6 +6,4 @@
 # folders
 .vscode/
 docs/
-bin/
-artifacts/
-quiz-3/
+examples/

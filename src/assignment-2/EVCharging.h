@@ -11,7 +11,7 @@ public:
     ~EVCharging();
     void getChargingStations() const;
     void getVehicles() const;
-    void run();
+    int run();
 };
 
 EVCharging::EVCharging(): chargingAllocator(&vehicles) {
@@ -22,7 +22,7 @@ EVCharging::EVCharging(): chargingAllocator(&vehicles) {
     }
 }
 
-EVCharging::~EVCharging() {}
+EVCharging::~EVCharging() {cout << "Exiting." << endl;}
 
 void EVCharging::getChargingStations() const {
     cout << "Charging Station information:" << endl;
@@ -49,24 +49,29 @@ void EVCharging::getVehicles() const {
     cout << endl;
 }
 
-void EVCharging::run() {
-    string fileName = "ChargingDemands.txt";
-    fstream demandFile(fileName);
-    
-    if (!filesystem::exists(fileName)) {
+int EVCharging::run() {
+
+    while (true) {
+        string fileName = "ChargingDemands.txt";
+        fstream demandFile(fileName);
         DemandGenerator demand;
         demand.Generate(fileName);
+    
+        chargingAllocator.load(demandFile, fileName);
+        getVehicles();
+        getChargingStations();
+        chargingAllocator.getAllocationInfo();
+        chargingAllocator.getQueueLengthAndTime();
+    
+        cout << "Press ENTER to exit "; // <-- add animated blinking dots `...` here
+        if (getchar() != EOF) {
+            break; // Exit the loop when any key is pressed
+        }
+
+        return 0;
     }
 
-    chargingAllocator.load(demandFile, fileName);
-
-    getVehicles();
-    
-    getChargingStations();
-
-    chargingAllocator.getAllocationInfo();
-    
-    chargingAllocator.getQueueLengthAndTime();
+    return -1;
 }
 
 #endif // EVCHARGING_H_

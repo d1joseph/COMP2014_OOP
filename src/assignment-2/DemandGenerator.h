@@ -34,9 +34,7 @@ public:
                     << capacityRange << "," << remainRange << "]" << endl;
         }
 
-        if (filesystem::exists(fileName)) {
-            cout << "successfully created: " << fileName << endl;
-        }
+        cout << "successfully created: " << fileName << endl;
 
         demandFile.close();
     };

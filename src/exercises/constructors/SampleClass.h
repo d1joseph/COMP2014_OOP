@@ -4,7 +4,10 @@
 class SampleClass {
 public:
     SampleClass(); // no args == default constructor
-    SampleClass(int, int); // overloading the constructor
+    SampleClass(int); // 1 overload
+    SampleClass(int, int); // 1+ overloads
+    int getId() const;
+    int getLevel() const;
 private:
     int id;
     int level;

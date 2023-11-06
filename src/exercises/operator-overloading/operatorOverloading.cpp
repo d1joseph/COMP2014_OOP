@@ -37,6 +37,21 @@ public:
     }
 
     // operator overloads
+    Block& operator++()
+    {
+        width++;
+        height++;
+
+        return *this;
+    }
+
+    Block operator++(int)
+    {
+        Block temp(*this)
+        ++(*this)
+        
+        return temp;
+    }
     
 
 };

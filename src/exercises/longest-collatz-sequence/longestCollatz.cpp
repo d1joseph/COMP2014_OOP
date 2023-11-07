@@ -5,35 +5,29 @@
 
 #include <vector>
 #include <iostream>
+#include <string>
 
 using namespace std;
 
 class LongestCollatz
 {
 private:
-    int chainLength;
+    int chainLength; // counter
     unsigned long seed; // first number to start the sequence
-    unsigned long current;
 public:
-    LongestCollatz():chainLength(0), seed(1000000){/* default constructor */}
-    LongestCollatz(unsigned long n):chainLength(0){ seed = n; };
+    LongestCollatz():chainLength(1), seed(1000000){/* default constructor */}
+    LongestCollatz(unsigned long n):chainLength(1){ seed = n; };
 
     int getChainLength() const
     {   
-        cout << "chainLength: " << chainLength << endl;
+        // cout << "chainLength: " << chainLength << endl;
         return chainLength;
     }
 
     unsigned long getSeed() const
     {
-        cout << "seed: " << seed << endl;
+        // cout << "seed: " << seed << endl;
         return seed;
-    }
-
-    unsigned long getCurrent() const
-    {
-        cout << "current: " << current << endl;
-        return current;
     }
 
     LongestCollatz& operator++()
@@ -65,12 +59,29 @@ public:
 
 int main()
 {
-    LongestCollatz lc(1000000); // seed with 1 x 10^6.
+    // produce a collatz sequence using the seed 13
+    LongestCollatz lc(1000000);
+    int s = lc.getSeed();
+    int end;
+    
+    end = 1; // sequence ends when i == end
+    int i = s; // copy s into i;
+    
+    // builds the sequence given a seed = s
+    while (i != end) {
+        lc++; // increment the chainLength counter;
 
-    for (int i = lc.getSeed(); i > 1; i--) {
-        --lc;
-        lc.getSeed();
+        if (i % 2 != 0) {
+            i = (3 * i) + 1; // odd operation
+        } else {
+            i = i / 2; // even operation
+        }
+
+        cout << "n = " << i << endl;
     }
+    cout << "senquence created.\n" << "Chain length: " << lc.getChainLength() << endl;
+
+    // TODO: find a seed < 1,000,000 that produces the longest chaing length;
 
     return 0;
 }
